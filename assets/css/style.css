@@ -225,8 +225,10 @@ article.active {
 .h4,
 .h5 {
   color: var(--white-2);
-  text-transform: capitalize;
+  
 }
+
+
 
 .h2 { font-size: var(--fs-1); }
 
@@ -242,18 +244,10 @@ article.active {
 .article-title {
   position: relative;
   padding-bottom: 7px;
+  font-size: 40px;
 }
 
-.article-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 30px;
-  height: 3px;
-  background: var(--text-gradient-yellow);
-  border-radius: 3px;
-}
+
 
 .has-scrollbar::-webkit-scrollbar {
   width: 5px; /* for vertical scrollbar */
@@ -455,14 +449,15 @@ main {
 \*-----------------------------------*/
 
 .navbar {
+  
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: hsla(240, 1%, 17%, 0.75);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--jet);
-  border-radius: 12px 12px 0 0;
+  background-color: transparent;
+  
+  border: transparent;
+ 
   box-shadow: var(--shadow-2);
   z-index: 5;
 }
@@ -924,7 +919,7 @@ main {
   color: var(--light-gray);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
-  text-transform: capitalize;
+  
   width: 100%;
   padding: 8px 10px;
   border-radius: 8px;
@@ -936,7 +931,7 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 .project-item { display: none; }
@@ -1016,7 +1011,7 @@ main {
   color: var(--white-2);
   font-size: var(--fs-5);
   font-weight: var(--fw-400);
-  text-transform: capitalize;
+  
   line-height: 1.3;
 }
 
@@ -1034,7 +1029,7 @@ main {
   #BLOG
 \*-----------------------------------*/
 
-.blog-posts { margin-bottom: 10px; }
+.blog-posts { margin-bottom: 50px; }
 
 .blog-posts-list {
   display: grid;
@@ -1190,7 +1185,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   padding: 13px 20px;
   border-radius: 14px;
   font-size: var(--fs-6);
-  text-transform: capitalize;
+  
   box-shadow: var(--shadow-3);
   z-index: 1;
   transition: var(--transition-1);
@@ -1341,7 +1336,9 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .avatar-box img { width: 120px; }
 
-  .info-content .name { margin-bottom: 15px; }
+  .info-content .name { 
+                         font-size: 50px;
+                       margin-bottom: 15px; }
 
   .info-content .title { padding: 5px 18px; }
 
@@ -1398,6 +1395,8 @@ textarea.form-input::-webkit-resizer { display: none; }
     gap: 18px;
     padding: 30px;
   }
+
+  
 
   .service-icon-box {
     margin-bottom: 0;
@@ -1690,23 +1689,26 @@ textarea.form-input::-webkit-resizer { display: none; }
     position: relative;
     width: max-content;
     margin: auto;
+    min-height: 320px;
+    
   }
 
-
+  
 
   /**
    * NAVBAR
    */
 
   .navbar {
+    
     position: absolute;
-    bottom: auto;
-    top: 0;
-    left: auto;
-    right: 0;
-    width: max-content;
-    border-radius: 0 20px;
-    padding: 0 20px;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: auto;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0px;
     box-shadow: none;
   }
 
