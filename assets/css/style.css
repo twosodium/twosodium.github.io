@@ -60,12 +60,12 @@
   --onyx: hsl(240, 51%, 45%);
   --eerie-black-1: hsl(247, 65%, 26%);
   --eerie-black-2: hsl(0, 0%, 0%);
-  --smoky-black: hsl(247, 65%, 18%);
+  --smoky-black: hsl(0, 0%, 100%);
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
-  --orange-yellow-crayola: hsl(240, 47%, 80%);
-  --vegas-gold: hsl(258, 29%, 80%);
-  --light-gray: hsl(0, 0%, 84%);
+  --orange-yellow-crayola: hsl(0, 21%, 54%);
+  --vegas-gold: hsl(67, 70%, 26%);
+  --light-gray: hsl(148, 7%, 54%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(225, 43%, 51%);
 
@@ -298,7 +298,7 @@ article.active {
 
 main {
   margin: 15px 12px;
-  margin-bottom: 75px;
+  margin-bottom: 60px;
   min-width: 259px;
 }
 
@@ -334,10 +334,10 @@ main {
 
 .info-content .name {
   color: var(--white-2);
-  font-size: var(--fs-3);
+  font-size: 50px;
   font-weight: var(--fw-500);
   letter-spacing: -0.25px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .info-content .title {
@@ -353,14 +353,14 @@ main {
 .info_more-btn {
   position: absolute;
   
-  margin-top: 20px;
-  margin-right: 20px;
-  border-radius: 0 15px;
+  margin-top: 0px;
+  margin-right: 0px;
+  border-radius: 0px;
   font-size: 20px;
   color: var(--orange-yellow-crayola);
-  background: var(--border-gradient-onyx);
+  
   padding: 30px;
-  box-shadow: var(--shadow-2);
+  
   transition: var(--transition-1);
   z-index: 1;
 }
@@ -368,18 +368,14 @@ main {
 .info_more-btn::before {
   content: "";
   position: absolute;
-  inset: 20px;
+  
   border-radius: inherit;
   
   transition: var(--transition-1);
   z-index: -1;
 }
 
-.info_more-btn:hover,
-.info_more-btn:focus { background: var(--bg-gradient-onyx); }
 
-.info_more-btn:hover::before,
-.info_more-btn:focus::before { background: var(--bg-gradient-onyx); }
 
 .info_more-btn span { display: none; }
 
@@ -493,7 +489,7 @@ main {
   #ABOUT
 \*-----------------------------------*/
 
-.about .article-title { margin-bottom: 15px; }
+.about .article-title { margin-bottom: 0px; }
 
 .about-text {
   color: var(--light-gray);
