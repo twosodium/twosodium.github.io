@@ -269,6 +269,7 @@ article.active {
   position: relative;
   padding-bottom: 7px;
   font-size: 40px;
+  z-index: 100;
 }
 
 
@@ -431,6 +432,7 @@ main {
 .contact-info {
   max-width: calc(100% - 46px);
   width: calc(100% - 46px);
+  z-index: 100;
 }
 
 .contact-title {
@@ -516,17 +518,22 @@ main {
 
 .about  
 
-.article-title { margin-bottom: 0px; }
+.article-title { margin-bottom: 0px; 
+                z-index: 100;
+               }
 
 .about-text {
   color: var(--light-gray);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
-  z-index: -1;
+  z-index: 100;
 }
 
-.about-text p { margin-bottom: 15px; }
+.about-text p { 
+  margin-bottom: 15px; 
+  z-index: 100;
+}
 
 
 
@@ -786,7 +793,9 @@ main {
   #RESUME
 \*-----------------------------------*/
 
-.article-title { margin-bottom: 30px; }
+.article-title { margin-bottom: 30px; 
+                z-index: 100;
+               }
 
 
 /**
@@ -1319,12 +1328,14 @@ textarea.form-input::-webkit-resizer { display: none; }
   .article-title {
     font-weight: 40;
     padding-bottom: 15px;
+    z-index: 100;
   }
 
   .article-title::after {
     width: 40px;
     font-weight: 40;
     height: 5px;
+    z-index: 100;
   }
 
   .icon-box {
@@ -1390,6 +1401,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .contact-info {
     max-width: calc(100% - 64px);
     width: calc(100% - 64px);
+    
   }
 
 
@@ -1410,9 +1422,14 @@ textarea.form-input::-webkit-resizer { display: none; }
    * #ABOUT
    */
 
-  .about .article-title { margin-bottom: 20px; }
+  .about .article-title { 
+    margin-bottom: 20px; 
+    z-index: 100;
+  }
 
-  .about-text { margin-bottom: 40px; }
+  .about-text { margin-bottom: 40px; 
+               z-index: 100;
+              }
 
   /* service */
 
@@ -1626,7 +1643,9 @@ textarea.form-input::-webkit-resizer { display: none; }
    * PORTFOLIO
    */
 
-  .article-title { padding-bottom: 20px; }
+  .article-title { padding-bottom: 20px; 
+                  z-index: 100;
+                 }
 
   .filter-select-box { display: none; }
 
