@@ -7,8 +7,13 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
 
 
 -->
+
+
 <!DOCTYPE html>
 <html lang="en">
+
+  
+  
 
 <head>
   <meta charset="UTF-8">
@@ -33,16 +38,20 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-
+  
+  
 <body>
+  <canvas id="canvas1"></canvas>
 
+  <div id="particles-js"></div> 
+  
   <!--
     - #MAIN
   -->
-
+  
   <main>
     
-
+    
     <!--
       - #SIDEBAR
     -->
@@ -50,6 +59,7 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
     <aside class="sidebar" data-sidebar>
 
       <div class="sidebar-info">
+        
 
         <figure class="avatar-box">
           <img src="./assets/images/my-avatar.png" alt="Anna Wu" width="80">
@@ -78,9 +88,9 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
           <li class="contact-item">
 
             <div class="contact-info">
-              <p class="contact-title">Email</p>
+              <p class="contact-title">Contact me:</p>
 
-              <a href="mailto:+justanothermercenary@gmail.com" class="contact-link">justanothermercenary@gmail.com</a>
+              <a href="https://form.jotform.com/240488698088173" class="contact-link">Jotform</a>
             </div>
 
           </li>
@@ -105,19 +115,15 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
 
         <ul class="social-list">
 
-          <li class="social-item">
+          <!--<li class="social-item">
             <a href="https://www.instagram.com/palindsodi/" class="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
 
-          <li class="social-item">
-            <a href="https://flat.io/@roguewinter" class="social-link">
-              
-            </a>
-          </li>
+          
 
-        </ul>
+        </ul>-->
 
       </div>
 
@@ -130,8 +136,9 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
     <!--
       - #main-content
     -->
-
+  
     <div class="main-content">
+      
 
       <!--
         - #NAVBAR
@@ -330,6 +337,7 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
           <div class="title-wrapper">
             <div class="icon-box">
               <ion-icon name="book-outline"></ion-icon>
+              
             </div>
 
             <h3 class="h3">Education</h3>
@@ -653,24 +661,29 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
         </section>
 
       </article>
+      
+    </div>
 
+</main>
 
+  
+  
+  <script src=
+      "particles.js-master/particles.js">
+  </script>
 
-
-
-     
+<script src=
+    "/particles.js-master/demo/js/app.js">
+</script>
 
     </div>
 
-  </main>
-
-
-
-  
-
 </body>
+  
+    
+  
   <!--
-    - custom js link
+    -  custom js link
   -->
   <script src="./assets/js/script.js"></script>
 
@@ -679,5 +692,7 @@ Feel free to edit the HTML and CSS to make it your own. You can also check the R
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  
 
 </html>
