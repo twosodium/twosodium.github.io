@@ -1,30 +1,14 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
-  
-  
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>palindsodi</title>
-
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/logo.svg" type="image/x-icon">
-
-  <!--
-    - custom css link
-  -->
+  <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!--
-    - google font link
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,436 +17,70 @@
   
 <body>
   <canvas id="canvas1"></canvas>
-
   <div id="particles-js"></div> 
   
-  <!--
-    - #MAIN
-  -->
-  
   <main>
-    
-    
-    <!--
-      - #SIDEBAR
-    -->
-
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-        
-
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Anna Wu" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="palindromic sodium">Anna Wu</h1>
-
-          <p class="title">professional brain-fryer</p>
-        </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Contacts</span>
-
-          
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="contact-info">
-              <p class="contact-title">Contact me:</p>
-
-              <a href="https://form.jotform.com/240488698088173" class="contact-link">Jotform</a>
-            </div>
-
-          </li>
-
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>California, USA</address>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <!--<li class="social-item">
-            <a href="https://www.instagram.com/palindsodi/" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          
-
-        </ul>-->
-
-      </div>
-
-    </aside>
-
-
-
-    
-
-    <!--
-      - #main-content
-    -->
-  
     <div class="main-content">
       
-
       <!--
         - #NAVBAR
       -->
+      
       <nav class="navbar">
-
         <ul class="navbar-list">
-
           <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link>About</button>
+            <button class="navbar-link active" data-nav-link>about</button>
           </li>
-
           <li class="navbar-item">
-              <a class="navbar-link" href="https://www.linkedin.com/in/twosodium/" >LinkedIn</a>
+              <a class="navbar-link" href="https://www.linkedin.com/in/twosodium/" >linkedin</a>
           </li>
-
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" data-nav-link>portfolio</button>
           </li>
-
-          <!--
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
-          </li>
-          -->
-
-          
-
         </ul>
-
       </nav>
       
-
-
-
-
-
       <!--
         - #ABOUT
       -->
-      
-
-      <article class="about  active" data-page="about">
-
+    
+      <article class="about  active" data-page="about" >
+        <div class="sidebar-info" data-sidebar>
+          <figure class="avatar-box">
+            <img src="./assets/images/my-avatar.png" alt="Anna Wu" width="80">
+          </figure>
+          <div class="info-content">
+            <h1 class="name" title="palindromic sodium">anna wu</h1>
+            <p class="title">professional brain-fryer</p>
+          </div>
+          
+          
+            <a href="https://form.jotform.com/240488698088173"class="contact-link"> <button class="info_more-btn" data-sidebar-btn> <span>contact me</span>
+            </button></a>
+          
+        </div>
+        <div class="sidebar-info_more" data-sidebar-btn>
+          
+        </div>
         <header>
-          <h2 class="h2 article-title">About me</h2>
+          <h2 class="h2 article-title">about</h2>
         </header>
-
         <section class="about-text">
           <p>
             Computer science student at Stanford, author, independent music composer and arranger. Interested in cybersecurity, artificial intelligence, web development and data
             science. Open to exciting new projects and research. 
           </p>
-
-          
         </section>
-
-<!--
-        <section class="service">
-
-          <h3 class="h3 service-title">what I do</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/lock.png" alt="cyber icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">cybersecurity</h4>
-                <p class="service-item-text">
-                  security engineering, incident response  AI integration)
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/game.png" alt="web icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">web development</h4>
-
-                <p class="service-item-text">
-                  making cool websites and JavaScript games 
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/writing.png" alt="mobile app icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">data science</h4>
-
-                <p class="service-item-text">
-                  
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/music.webp" alt="camera icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">arts</h4>
-
-                <p class="service-item-text">
-                  composing and arranging cinematic orchestral works sci-fi, science fantasy and historical fiction novels, novellas, short stories and poetry
-                </p>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-        
-
-
-        <section class="clients">
-
-          <h3 class="h3 clients-title">background</h3>
-
-          <ul class="clients-list has-scrollbar">
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-1-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-2-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-3-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-        -->
-        
       </article>
-
-
-
-      <!--
-        - #RESUME
-      
-
-      <article class="resume" data-page="resume">
-
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-              
-            </div>
-
-            <h3 class="h3">Education</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Troy High School</h4>
-
-              <span>2020 — 2024</span>
-
-              <p class="timeline-text">
-                
-                
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">?!</h4>
-
-              <span>2024 - 2028</span>
-
-              <p class="timeline-text">
-                
-              </p>
-
-            </li>
-
-            
-
-          </ol>
-
-        </section>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Experience</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Research Intern, Carnegie Mellon University School of Computer Science</h4>
-
-              <span>2023</span>
-
-              <p class="timeline-text">
-                Quantitatively analyzed the spread of information in news networks, particularly pink slime media during the 2022 midterm election. 
-              </p>
-
-            </li>
-
-            
-
-          </ol>
-
-        </section>
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Graphic design</h5>
-                <data value="70">70%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Branding</h5>
-                <data value="90">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">WordPress</h5>
-                <data value="50">50%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 50%;"></div>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-        
-
-      </article>
-      -->
-
 
       <!--
         - #PORTFOLIO
       -->
 
       <article class="portfolio" data-page="portfolio">
-
         <header>
-          <h2 class="h2 article-title">Portfolio</h2>
+          <h2 class="h2 article-title">portfolio</h2>
         </header>
-
         <section class="projects">
 
           <ul class="filter-list">
@@ -680,66 +298,18 @@
           </ul>
         </section>
       </article>
-
-      <!--
-        - #BLOG (unused)
-      -->
-
-      <article class="blog" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="https://www.youtube.com/watch?v=bFdIUjMYG6I">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/automata.png" alt="image" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-
-                    <time datetime="2022-03-20">Mar 20, 2023</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Cellular automata</h3>
-
-                  <p class="blog-text">
-                    An animated introduction.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
       
     </div>
 
 </main>
-
   <script src=
       "particles.js-master/particles.js">
   </script>
-
   <script src=
-      "/particles.js-master/demo/js/app.js">
+      "/particles.js-master/app.js">
   </script>
-
     </div>
-
+</div>
 </body>
   
     
