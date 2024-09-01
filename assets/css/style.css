@@ -516,7 +516,7 @@ main {
   #ABOUT
 \*-----------------------------------*/
 
-.about  
+.about  { margin-bottom: 100px; }
 
 .article-title { margin-bottom: 0px; 
                 z-index: 100;
