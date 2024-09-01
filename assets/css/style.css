@@ -516,7 +516,11 @@ main {
   #ABOUT
 \*-----------------------------------*/
 
-.about  { margin-bottom: 100px; }
+.about  { margin-bottom: 100px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
 
 .article-title { margin-bottom: 0px; 
                 z-index: 100;
