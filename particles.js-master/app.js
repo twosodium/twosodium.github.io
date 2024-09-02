@@ -23,16 +23,16 @@ particlesJS('particles-js',
         }
       },
       "color": {
-        "value": "#000000"
+        "value": "#4c67b8"
       },
       "shape": {
-        "type": "triangle",
+        "type": "polygon",
         "stroke": {
           "width": 0,
-          "color": "#000000"
+          "color": "#4c67b8"
         },
         "polygon": {
-          "nb_sides": 5
+          "nb_sides": 8
         },
         "image": {
           "src": "img/github.svg",
@@ -41,7 +41,7 @@ particlesJS('particles-js',
         }
       },
       "opacity": {
-        "value": 0.5,
+        "value": 1,
         "random": true,
         "anim": {
           "enable": true,
@@ -51,8 +51,8 @@ particlesJS('particles-js',
         }
       },
       "size": {
-        "value": 5,
-        "random": false,
+        "value": 10,
+        "random": true,
         "anim": {
           "enable": true,
           "speed": 40,
@@ -63,8 +63,8 @@ particlesJS('particles-js',
       "line_linked": {
         "enable": true,
         "distance": 150,
-        "color": "#000",
-        "opacity": 0.4,
+        "color": "#4c67b8",
+        "opacity": 0.5,
         "width": 1
       },
       "move": {
@@ -75,7 +75,7 @@ particlesJS('particles-js',
         "straight": false,
         "out_mode": "out",
         "attract": {
-          "enable": false,
+          "enable": true,
           "rotateX": 600,
           "rotateY": 1200
         }
@@ -90,7 +90,7 @@ particlesJS('particles-js',
         },
         "onclick": {
           "enable": true,
-          "mode": "push"
+          "mode": "bubble"
         },
         "resize": true
       },
@@ -102,14 +102,14 @@ particlesJS('particles-js',
           }
         },
         "bubble": {
-          "distance": 400,
-          "size": 40,
-          "duration": 2,
-          "opacity": 8,
+          "distance": 200,
+          "size": 20,
+          "duration": 1,
+          "opacity": 0.7,
           "speed": 3
         },
         "repulse": {
-          "distance": 200
+          "distance": 100
         },
         "push": {
           "particles_nb": 4
