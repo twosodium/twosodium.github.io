@@ -229,9 +229,14 @@ article.active {
 .article-title {
   position: relative;
   padding-bottom: 7px;
-  padding-top: 50px;
+  padding-top: 30px;
   font-size: 40px;
   z-index: 100;
+}
+
+
+.title-with-logo h2 {
+    margin-top: 200;
 }
 
 
@@ -334,12 +339,14 @@ article {
 }
 
 .avatar-box {
-  background: var(--gradient-indigomid);
+  background: var(--black);
   border-radius: 50px;
+  margin-left: 0px;
+  
 }
 
 .info-content .title {
-  color: var(--indigolightlight);
+  color: var(--light-gray);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   width: max-content;
@@ -480,6 +487,7 @@ article {
 
 .about {
   margin-bottom: 100px;
+  text-align: left;
 }
 
 .article-title {
@@ -499,8 +507,6 @@ article {
   margin-bottom: 20px;
   z-index: 100;
 }
-
-
 
 /*-----------------------------------*\
   #PORTFOLIO
@@ -888,7 +894,7 @@ textarea.form-input::-webkit-resizer {
   }
 
   .avatar-box img {
-    width: 120px;
+    width: 150px;
     border-radius: 50px;
   }
 
@@ -899,7 +905,7 @@ textarea.form-input::-webkit-resizer {
     overflow: hidden;
 
     font-size: 60px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     margin-right: 5px;
     color: var(--white-1);
     font-weight: 800;
