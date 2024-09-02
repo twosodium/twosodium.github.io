@@ -1,18 +1,11 @@
-/* -----------------------------------------------
-/* How to use? : Check the GitHub README
-/* ----------------------------------------------- */
-
-/* To load a config file (particles.json) you need to host this demo (MAMP/WAMP/local)... */
-/*
-particlesJS.load('particles-js', 'particles.json', function() {
-  console.log('particles.js loaded - callback');
-});
-*/
-
-/* Otherwise just put the config content (json): */
+function getRandomHex() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) color += letters[Math.floor(Math.random() * 16)];
+  return color;
+}
 
 particlesJS('particles-js',
-  
   {
     "particles": {
       "number": {
@@ -29,7 +22,7 @@ particlesJS('particles-js',
         "type": "polygon",
         "stroke": {
           "width": 0,
-          "color": "#4c67b8"
+          "color": "0"
         },
         "polygon": {
           "nb_sides": 8
@@ -129,5 +122,4 @@ particlesJS('particles-js',
       "background_size": "cover"
     }
   }
-
 );

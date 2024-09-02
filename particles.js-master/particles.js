@@ -4,7 +4,6 @@ var pJS = function(tag_id, params){
 
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
 
-
   this.pJS = {
     canvas: {
       el: canvas_el,
@@ -281,14 +280,24 @@ var pJS = function(tag_id, params){
       }
 
     }
-    else if(color.value == 'random'){
-      this.color.rgb = {
-        r: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
-        g: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
-        b: (Math.floor(Math.random() * (255 - 0 + 1)) + 0)
+    else if (color.value == 'random'){
+      var colorsetter = Math.random();
+      if (colorsetter < 0.5){
+        this.color.rgb = {
+          r: 209,
+          g: 17,
+          b: 17
+        }
+      }
+      else {
+        this.color.rgb = {
+          r: 56,
+          g: 56,
+          b: 173
+        }
       }
     }
-    else if(typeof(color.value) == 'string'){
+    else if (typeof(color.value) == 'string'){
       this.color = color;
       this.color.rgb = hexToRgb(this.color.value);
     }
