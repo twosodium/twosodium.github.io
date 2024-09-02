@@ -839,7 +839,7 @@ textarea.form-input::-webkit-resizer {
 /* medium screen */
 
 
-@media (min-width: 450px) {
+@media (min-width: 0px) {
 
   .project-img,
   .blog-banner-box {
@@ -848,7 +848,7 @@ textarea.form-input::-webkit-resizer {
 
 }
 
-@media (min-width: 580px) {
+@media (min-width: 0px) {
 
   :root {
     --fs-1: 32px;
@@ -1021,6 +1021,52 @@ textarea.form-input::-webkit-resizer {
   .form-btn ion-icon {
     font-size: 18px;
   }
+  .has-scrollbar::-webkit-scrollbar-button {
+    width: 100px;
+  }
+
+  .contacts-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 15px;
+  }
+
+  .article-title {
+    padding-bottom: 20px;
+    z-index: 100;
+  }
+
+  .filter-select-box {
+    display: none;
+  }
+
+  .filter-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    padding-left: 5px;
+    margin-bottom: 30px;
+  }
+
+  .filter-item button {
+    color: var(--light-gray);
+    font-size: var(--fs-5);
+    transition: var(--transition-1);
+  }
+
+  .filter-item button:hover {
+    color: var(--light-gray-70);
+  }
+
+  .filter-item button.active {
+    color: var(--reddish);
+  }
+
+  .project-list,
+  .blog-posts-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  
 
 }
 
