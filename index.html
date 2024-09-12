@@ -12,11 +12,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
 </head>
   
   
 <body>
-  <
+  
   <canvas id="canvas1"></canvas>
   <div id="particles-js"></div> 
   
@@ -27,7 +28,7 @@
       
       <nav class="navbar">
         <ul class="navbar-list">
-          <img src="./assets/images/logo_black.svg" alt="Anna Wu" width="30"></a>
+          <img src="./assets/images/logo.png" alt="Anna Wu" width="30"></a>
           
           <li class="navbar-item">
             <button class="navbar-link active" data-nav-link>about</button>
@@ -38,10 +39,35 @@
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>portfolio</button>
           </li>
-          </li> <li class="navbar-item"> 
+          <li class="navbar-item"> 
             <a class="navbar-link" href="https://form.jotform.com/twosodium/contact"> contact me </a>
-          </ul>
-          
+          </li> 
+          <!--
+          <div class="musice">
+              <audio id="music">
+                  <source src="hymn_hq.mp3" type="audio/mp3">
+              </audio>
+              <button onclick="playAudio()" type="button">
+                ⏵
+                    <i class="fa-solid fa-play"></i>
+                </button>
+              <button onclick="pauseAudio()" type="button">
+                ⏸ 
+                    <i class="fa-solid fa-pause"></i>
+              </button>
+              <p class="music-text"> roguewinter -- hymn of the mercenaries</p>
+              <script>
+                  var audioT = document.getElementById("music");
+                  function playAudio() {
+                      audioT.play();
+                  }
+                  function pauseAudio() {
+                      audioT.pause();
+                  }
+              </script>
+          </div>
+          -->
+        </ul>
       </nav>
       
       <!-- about -->
@@ -271,20 +297,25 @@
       
     </div>
 
-</main>
-  <script src=
-      "particles.js-master/particles.js">
-  </script>
-  <script src=
-      "/particles.js-master/app.js">
-  </script>
-    </div>
-</div>
-</body>
+    <!-- audio -->
+    
+      
   
+    
+
+</main>
+<script src=
+    "particles.js-master/particles.js">
+</script>
+<script src=
+    "/particles.js-master/app.js">
+</script>
+  </div>
+</div>
+
+  
+</body>
   <script src="./assets/js/script.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
 </html>

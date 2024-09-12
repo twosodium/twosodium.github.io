@@ -136,6 +136,7 @@ textarea {
   #REUSED STYLE
 \*-----------------------------------*/
 
+
 .sidebar,
 article {
   background: var(--black);
@@ -441,8 +442,21 @@ article {
 
 
 /*-----------------------------------*\
-  #NAVBAR
+  #NAVBAR, MUSIC
 \*-----------------------------------*/
+.musice button {
+  display: inline-block;
+  color: white; 
+  margin-left: 15px;
+  margin-top: 5px;
+}
+.music-text{
+  font-size: 10px;
+  color: white;
+  margin-left: 15px;
+  margin-top: 5px;
+  display: inline-block;
+}
 
 .navbar {
   position: fixed;
@@ -464,7 +478,7 @@ article {
 }
 
 .navbar-link {
-  color: white;
+  color: var(--light-gray);
   font-size: var(--fs-8);
   padding: 20px 7px;
   transition: color var(--transition-1);
@@ -474,12 +488,14 @@ article {
   color: var(--reddishish)
 }
 .navbar-link:focus {
-  color: white
+  color: var(--light-gray-70)
 }
 
 .navbar-link.active {
   color: var(--reddish);
 }
+
+
 
 
 /*-----------------------------------*\
@@ -971,6 +987,8 @@ textarea.form-input::-webkit-resizer {
   /**
    * #NAVBAR
    */
+
+  
 
   .navbar {
     border-radius: 20px 20px 0 0;
