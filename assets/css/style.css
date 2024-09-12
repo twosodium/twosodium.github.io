@@ -40,7 +40,7 @@ body {
   /* solid */
 
   --black: hsl(0, 0%, 0%);
-  --indigolightlight: hsl(225, 43%, 51%);
+  --indigolightlight: hsl(225, 60%, 67%);
   --indigolight: hsl(240, 51%, 45%);
   --indigodark: hsl(247, 65%, 26%);
   --white-1: hsl(0, 0%, 100%);
@@ -605,7 +605,7 @@ article {
 }
 
 .select-item button:hover {
-  --black: hsl(240, 2%, 20%);
+  color: var(--reddishish);
 }
 
 .project-list {
@@ -1080,7 +1080,7 @@ textarea.form-input::-webkit-resizer {
   }
 
   .filter-item button:hover {
-    color: var(--light-gray-70);
+    color: var(--reddishish);
   }
 
   .filter-item button.active {
@@ -1139,7 +1139,7 @@ textarea.form-input::-webkit-resizer {
   }
 
   .filter-item button:hover {
-    color: var(--light-gray-70);
+    color: var(--reddishish);
   }
 
   .filter-item button.active {
