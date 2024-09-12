@@ -45,6 +45,7 @@ body {
   --indigodark: hsl(247, 65%, 26%);
   --white-1: hsl(0, 0%, 100%);
   --reddish: hsl(0, 71%, 39%);
+  --reddishish: hsl(0, 20%, 70%);
   --light-gray: hsl(230, 5%, 53%);
   --light-gray-70: hsla(0, 0%, 84%);
 
@@ -463,15 +464,17 @@ article {
 }
 
 .navbar-link {
-  color: var(--light-gray);
+  color: white;
   font-size: var(--fs-8);
   padding: 20px 7px;
   transition: color var(--transition-1);
 }
 
-.navbar-link:hover,
+.navbar-link:hover{
+  color: var(--reddishish)
+}
 .navbar-link:focus {
-  color: var(--light-gray-70);
+  color: white
 }
 
 .navbar-link.active {
