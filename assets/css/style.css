@@ -40,11 +40,10 @@ body {
   /* solid */
 
   --black: hsl(0, 0%, 0%);
-  --indigolightlight: hsl(225, 60%, 67%);
-  --indigolight: hsl(240, 51%, 45%);
-  --indigodark: hsl(247, 65%, 26%);
-  --white-1: hsl(0, 0%, 100%);
-  --light-gray: hsl(230, 5%, 53%);
+  --indigolightlight: #e6d1ab ;
+  --indigolight: hsl(2, 47%, 44%);
+  --white-1: #a53f3c;
+  --light-gray: #2a3b40;
   --light-gray-70: hsla(0, 0%, 84%);
 
 
@@ -170,7 +169,7 @@ article {
   content: "";
   position: absolute;
   inset: 1px;
-  background: var(--indigodark);
+  background: var(--indigolight);
   border-radius: 8;
   z-index: -1;
 }
