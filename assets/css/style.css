@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: #000;
   margin: 0;
   position: relative;
 }
@@ -40,7 +40,7 @@ body {
   /* solid */
 
   --black: hsl(0, 0%, 0%);
-  --indigolightlight: #e6d1ab ;
+  --indigolightlight: #e6d1ab;
   --indigolight: hsl(2, 47%, 44%);
   --white-1: #a53f3c;
   --light-gray: #2a3b40;
@@ -345,7 +345,7 @@ article {
 }
 
 .info-content .title {
-  color: var(--light-gray);
+  color: var(--indigolightlight);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   width: max-content;
@@ -510,7 +510,7 @@ article {
 }
 
 .about-text {
-  color: var(--indigolightlight);
+  color: #FFF;
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.2;
