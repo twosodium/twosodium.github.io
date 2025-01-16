@@ -1130,10 +1130,28 @@ textarea.form-input::-webkit-resizer {
     width: 300px;
   }
 
+  .sidebar-info {
+    flex-direction: column;
+    width: 300px;
+  }
+
   .has-scrollbar::-webkit-scrollbar-button {
     width: 50px;
   }
 
+  .navbar-link {
+    font-size: 10px;
+    
+  }
+
+  .navbar-list {
+    padding: 0 00px;
+  }
+
+  .navbar-link {
+    padding: 0px 0px;
+  }
+  
   .contacts-list {
     grid-template-columns: 1fr 1fr;
     gap: 30px 15px;
@@ -1141,7 +1159,7 @@ textarea.form-input::-webkit-resizer {
 
   .article-title {
     padding-bottom: 20px;
-    z-index: 100;
+    z-index: 1;
     font-size: 30px;
   }
 
