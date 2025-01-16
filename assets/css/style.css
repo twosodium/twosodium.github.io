@@ -1164,6 +1164,16 @@ textarea.form-input::-webkit-resizer {
     gap: 30px 15px;
   }
 
+  .filter-list {
+    gap: 0px 0px;
+    padding-left: 0px;
+    flex-wrap: wrap;
+  }
+
+  .filter-item button {
+    font-size: 10px;
+  }
+  
   .article-title {
     padding-bottom: 20px;
     z-index: 1;
