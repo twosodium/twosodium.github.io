@@ -1135,13 +1135,20 @@ textarea.form-input::-webkit-resizer {
     width: 300px;
   }
 
+  .info-content {
+    margin-right: 50px
+  }
+
+  .avatar-box {
+    margin-right: 50px
+  }
+
   .has-scrollbar::-webkit-scrollbar-button {
     width: 50px;
   }
 
   .navbar-link {
     font-size: 10px;
-    
   }
 
   .navbar-list {
