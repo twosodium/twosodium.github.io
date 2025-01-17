@@ -1158,6 +1158,7 @@ textarea.form-input::-webkit-resizer {
   .navbar-link {
     padding: 0px 0px;
   }
+
   
   .contacts-list {
     grid-template-columns: 1fr 1fr;
