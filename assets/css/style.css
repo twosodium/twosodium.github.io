@@ -1169,6 +1169,7 @@ textarea.form-input::-webkit-resizer {
     flex: 3;
   }
   .section-item:nth-child(3) {
+    margin-top: 20px;
     flex: 2; 
   }
   
