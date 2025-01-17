@@ -1159,6 +1159,18 @@ textarea.form-input::-webkit-resizer {
     padding: 0px 0px;
   }
 
+  .caption {
+      font-size: 10px;
+  }
+  .section-item:nth-child(1) {
+    flex: 3;
+  }
+  .section-item:nth-child(2) {
+    flex: 3;
+  }
+  .section-item:nth-child(3) {
+    flex: 2; 
+  }
   
   .contacts-list {
     grid-template-columns: 1fr 1fr;
