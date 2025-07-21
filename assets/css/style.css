@@ -549,6 +549,12 @@ article {
   z-index: 100;
 }
 
+.about-text a {
+  color: inherit;      /* Inherit the white color from .about-text */
+  display: inline;     /* Make links inline, not block */
+  text-decoration: underline; /* Optional: add underline for clarity */
+}
+
 .about-text p {
   margin-bottom: 20px;
   z-index: 100;
