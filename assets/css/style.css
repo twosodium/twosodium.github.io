@@ -314,6 +314,12 @@ article.active {
   color: #c7c7c7; 
 }
 
+.caption a {
+  color: #FFF;
+  text-decoration: underline;
+  display: inline;
+}
+
 
 main {
   font-family: monospace;
