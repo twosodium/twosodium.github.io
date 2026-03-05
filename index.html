@@ -60,7 +60,7 @@
         </div>
         <section class="about-text">
           <p>
-            I study computer science at Stanford. My interests include applications of AI/ML in computer security and neuroscience-informed design of ML systems and algorithms. I also enjoy <a href="https://hhde.substack.com">writing</a>, listening to/composing/arranging <a href="https://flat.io/@roguewinter/">music</a>, minesweeper, the history of Western esotericism, the ocean and sometimes making websites.
+            I study computer science at Stanford. My interests include applications of AI/ML in computer security and neuroscience-inspired design of ML systems and algorithms. I also enjoy <a href="https://hhde.substack.com">writing</a>, listening to/composing/arranging <a href="https://flat.io/@roguewinter/">music</a>, minesweeper, the history of Western esotericism, the ocean and sometimes making websites.
           </p>
         </section>
 
@@ -432,13 +432,14 @@
   audioEl.addEventListener('pause', updatePlayPauseState);
   updatePlayPauseState();
 
-  function tryStartMusic() {
+  function tryStartMusic(e) {
+    if (e && e.type === 'click' && e.target.closest('.navbar')) return;
     playAudio();
     document.body.removeEventListener('click', tryStartMusic);
     document.body.removeEventListener('keydown', tryStartMusic);
   }
-  document.body.addEventListener('click', tryStartMusic, { once: true });
-  document.body.addEventListener('keydown', tryStartMusic, { once: true });
+  document.body.addEventListener('click', tryStartMusic);
+  document.body.addEventListener('keydown', tryStartMusic);
 
   // --- Audio-reactive particle pulse (BGM only) ---
   var audioCtx = null;

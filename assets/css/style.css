@@ -1274,7 +1274,7 @@ body.sound-started .float-hints {
   position: absolute;
   top: 50%;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.82);
   font-style: italic;
   white-space: nowrap;
   opacity: 0;
