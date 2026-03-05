@@ -15,7 +15,7 @@ particlesJS("particles-js", {
       },
     },
     color: {
-      value: "#4c5973",
+      value: ["#3e4a5e", "#434d62", "#4c5973", "#55627a", "#5a6578"],
     },
     shape: {
       type: "circle",
@@ -43,7 +43,7 @@ particlesJS("particles-js", {
       },
     },
     size: {
-      value: 5,
+      value: 2.5,
       random: true,
       anim: {
         enable: false,
@@ -94,10 +94,10 @@ particlesJS("particles-js", {
         },
       },
       bubble: {
-        distance: 200,
-        size: 10,
+        distance: 320,
+        size: 2.5,
         duration: 0.3,
-        opacity: 0.7,
+        opacity: 1,
         speed: 10,
       },
       repulse: {

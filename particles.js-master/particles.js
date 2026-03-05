@@ -302,6 +302,8 @@ var pJS = function(tag_id, params){
       this.color.rgb = hexToRgb(this.color.value);
     }
 
+    this.brightenAmount = 0;
+
     /* opacity */
     this.opacity = (pJS.particles.opacity.random ? Math.random() : 1) * pJS.particles.opacity.value;
     if(pJS.particles.opacity.anim.enable){
@@ -397,6 +399,14 @@ var pJS = function(tag_id, params){
   };
 
 
+  pJS.fn.vendors.lightenRgb = function(rgb, amount) {
+    return {
+      r: Math.min(255, Math.round(rgb.r + (255 - rgb.r) * amount)),
+      g: Math.min(255, Math.round(rgb.g + (255 - rgb.g) * amount)),
+      b: Math.min(255, Math.round(rgb.b + (255 - rgb.b) * amount))
+    };
+  };
+
   pJS.fn.particle.prototype.draw = function() {
 
     var p = this;
@@ -413,10 +423,15 @@ var pJS = function(tag_id, params){
       var opacity = p.opacity;
     }
 
-    if(p.color.rgb){
-      var color_value = 'rgba('+p.color.rgb.r+','+p.color.rgb.g+','+p.color.rgb.b+','+opacity+')';
+    var drawColor = p.color;
+    var blend = (p.brightenAmount !== undefined && p.brightenAmount > 0) ? p.brightenAmount : 0;
+    if (blend > 0 && p.color.rgb) {
+      drawColor = { rgb: pJS.fn.vendors.lightenRgb(p.color.rgb, blend) };
+    }
+    if(drawColor.rgb){
+      var color_value = 'rgba('+drawColor.rgb.r+','+drawColor.rgb.g+','+drawColor.rgb.b+','+opacity+')';
     }else{
-      var color_value = 'hsla('+p.color.hsl.h+','+p.color.hsl.s+'%,'+p.color.hsl.l+'%,'+opacity+')';
+      var color_value = 'hsla('+drawColor.hsl.h+','+drawColor.hsl.s+'%,'+drawColor.hsl.l+'%,'+opacity+')';
     }
 
     pJS.canvas.ctx.fillStyle = color_value;
@@ -910,10 +925,16 @@ var pJS = function(tag_id, params){
       }
 
       if(pJS.tmp.bubble_clicking){
+        var dx_click = p.x - pJS.interactivity.mouse.click_pos_x,
+            dy_click = p.y - pJS.interactivity.mouse.click_pos_y,
+            dist_click = Math.sqrt(dx_click*dx_click + dy_click*dy_click);
         /* size */
         process(pJS.interactivity.modes.bubble.size, pJS.particles.size.value, p.radius_bubble, p.radius, 'size');
         /* opacity */
         process(pJS.interactivity.modes.bubble.opacity, pJS.particles.opacity.value, p.opacity_bubble, p.opacity, 'opacity');
+        if(dist_click <= pJS.interactivity.modes.bubble.distance){
+          p.clickBrightUntil = (new Date().getTime()) + 500;
+        }
       }
 
     }
@@ -945,6 +966,10 @@ var pJS = function(tag_id, params){
       }else{
         p.x = pos.x;
         p.y = pos.y;
+      }
+
+      if(dist_mouse <= repulseRadius){
+        p.repulseBrightUntil = (new Date().getTime()) + 400;
       }
 
     }

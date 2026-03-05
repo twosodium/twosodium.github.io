@@ -25,10 +25,13 @@
   
   
 <body>
-  <div id="particles-js"></div> 
+  <div id="particles-js"></div>
+  <div id="float-hints" class="float-hints" aria-hidden="true">
+    <span class="float-hint float-hint--left">click anywhere to start sound</span>
+    <span class="float-hint float-hint--right">click anywhere to start sound</span>
+  </div>
   <main>
     <div class="main-content">
-      <!-- navigation -->
       <nav class="navbar">
         <ul class="navbar-list">
           <img src="./assets/images/logo.png" alt="Anna Wu" width="30"></a>
@@ -42,40 +45,9 @@
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>portfolio</button>
           </li>
-          <!--
-          <li class="navbar-item"> 
-            <a class="navbar-link" href="https://form.jotform.com/twosodium/contact"> contact me </a>
-          </li> 
-          
-          <div class="musice">
-              <audio id="music">
-                  <source src="hymn_hq.mp3" type="audio/mp3">
-              </audio>
-              <button onclick="playAudio()" type="button">
-                ⏵
-                    <i class="fa-solid fa-play"></i>
-                </button>
-              <button onclick="pauseAudio()" type="button">
-                ⏸ 
-                    <i class="fa-solid fa-pause"></i>
-              </button>
-              <p class="music-text"> roguewinter -- hymn of the mercenaries</p>
-              <script>
-                  var audioT = document.getElementById("music");
-                  function playAudio() {
-                      audioT.play();
-                  }
-                  function pauseAudio() {
-                      audioT.pause();
-                  }
-              </script>
-          </div>
-          -->
         </ul>
       </nav>
-      
-      <!-- about -->
-    
+
       <article class="about  active" data-page="about" >
         <div class="sidebar-info" data-sidebar>
           <figure class="avatar-box">
@@ -83,13 +55,12 @@
           </figure>
           <div class="info-content">
             <h1 class="name" title="twosodium">anna wu</h1>
-            <p class="title">professional brain-fryer</p>
+            <p class="title">/ˈænə ǔ/</p>
           </div>
         </div>
-        <h2 class="h2 article-title">about</h2>
         <section class="about-text">
           <p>
-            I study computer science at Stanford. I have a wide range of interests; at the moment I'm most excited about applying neuroscience principles to ML and applying ML to computer security. I also enjoy writing, composing and arranging <a href="https://flat.io/@roguewinter/">music</a>, minesweeper, early modern European history, the ocean and sometimes making websites.
+            I study computer science at Stanford. My interests include applications of AI/ML in computer security and neuroscience-informed design of ML systems and algorithms. I also enjoy <a href="https://hhde.substack.com">writing</a>, listening to/composing/arranging <a href="https://flat.io/@roguewinter/">music</a>, minesweeper, the history of Western esotericism, the ocean and sometimes making websites.
           </p>
         </section>
 
@@ -127,14 +98,21 @@
             </div>
 
             <div class="section-item">
-              
+              <img src="./assets/images/storygraph.png" alt="StoryGraph" class="storygraph-img" loading="lazy">
               <p class="caption"><em><a href="https://app.thestorygraph.com/profile/eightseas">now reading</a></em></p>
             </div>
           </div>
+
+          <div class="musice">
+            <audio id="music" loop>
+              <source src="./assets/8bit_lacrimosa.mp3" type="audio/mp3">
+            </audio>
+            <button id="btn-play" onclick="playAudio()" type="button" title="Play">⏵</button>
+            <button id="btn-pause" onclick="pauseAudio()" type="button" title="Pause">⏸</button>
+            <span class="music-text">BGM: Requiem (Verdi), "Lacrimosa," my remix</span>
+          </div>
         
       </article>
-
-      <!-- portfolio -->
 
       <article class="portfolio" data-page="portfolio">
         <header>
@@ -421,63 +399,128 @@
               </a>
             </li>
 
-            <!--<li class="project-item  active" data-filter-item data-category="publications">
-              <a href="https://www.troyoracle.com/2022-poems/2022/1/28/thousand-anna-wu-sophomore">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/article.png" height="100" alt="writing" loading="lazy">
-                </figure>
-                <h3 class="project-title">Thousand</h3>
-                <p class="project-category">writing</p>
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="publications">
-              <a href="https://www.troyoracle.com/2023-litmag-poetry/2023/2/14/the-watchmans-walls-by-anna-wu">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/article.png" height="100" alt="writing" loading="lazy">
-                </figure>
-                <h3 class="project-title">The watchman's walls</h3>
-                <p class="project-category">writing</p>
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="writing">
-              <a href="">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/deicide.png" alt="writing" loading="lazy">
-                </figure>
-                <h3 class="project-title">Deicide</h3>
-                <p class="project-category">Writing</p>
-              </a>
-            </li>-->
-          
           </ul>
         </section>
       </article>
       
     </div>
 
-    <!-- audio -->
-    
-      
-  
-    
-
 </main>
-<script src=
-    "particles.js-master/particles.js">
-</script>
-<script src=
-    "/particles.js-master/app.js">
+<script src="particles.js-master/particles.js"></script>
+<script src="./particles.js-master/app.js"></script>
+<script>
+(function() {
+  var audioEl = document.getElementById('music');
+  if (!audioEl) return;
+  audioEl.volume = 0.2;
+
+  var btnPlay = document.getElementById('btn-play');
+  var btnPause = document.getElementById('btn-pause');
+  function updatePlayPauseState() {
+    var playing = !audioEl.paused;
+    if (btnPlay) btnPlay.classList.toggle('active', playing);
+    if (btnPause) btnPause.classList.toggle('active', !playing);
+  }
+  function playAudio() { audioEl.play().catch(function() {}); }
+  function pauseAudio() { audioEl.pause(); }
+  window.playAudio = playAudio;
+  window.pauseAudio = pauseAudio;
+  audioEl.addEventListener('play', function() {
+    updatePlayPauseState();
+    document.body.classList.add('sound-started');
+  });
+  audioEl.addEventListener('pause', updatePlayPauseState);
+  updatePlayPauseState();
+
+  function tryStartMusic() {
+    playAudio();
+    document.body.removeEventListener('click', tryStartMusic);
+    document.body.removeEventListener('keydown', tryStartMusic);
+  }
+  document.body.addEventListener('click', tryStartMusic, { once: true });
+  document.body.addEventListener('keydown', tryStartMusic, { once: true });
+
+  // --- Audio-reactive particle pulse (BGM only) ---
+  var audioCtx = null;
+  var analyser = null;
+  var dataArray = null;
+  var rafId = null;
+  var PULSE_STRENGTH = 2;
+  var PULSE_SENSITIVITY = 3;
+  var SMOOTHING = 0.7;
+  var smoothedLevel = 0;
+
+  function initAudioAnalyser() {
+    if (audioCtx) return true;
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var source = audioCtx.createMediaElementSource(audioEl);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+      analyser.smoothingTimeConstant = SMOOTHING;
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function getAudioLevel() {
+    if (!analyser || !dataArray) return 0;
+    analyser.getByteFrequencyData(dataArray);
+    var sum = 0;
+    for (var i = 0; i < dataArray.length; i++) sum += dataArray[i];
+    return (sum / dataArray.length) / 255;
+  }
+
+  function pulseParticles() {
+    if (!window.pJSDom || !window.pJSDom[0]) {
+      rafId = requestAnimationFrame(pulseParticles);
+      return;
+    }
+    var pJS = window.pJSDom[0].pJS;
+    var arr = pJS.particles.array;
+    if (!arr || !arr.length) {
+      rafId = requestAnimationFrame(pulseParticles);
+      return;
+    }
+    var level = getAudioLevel();
+    smoothedLevel = smoothedLevel + (level - smoothedLevel);
+    var boosted = smoothedLevel * PULSE_SENSITIVITY;
+    var scale = 1 + PULSE_STRENGTH * boosted;
+    var now = Date.now();
+    for (var i = 0; i < arr.length; i++) {
+      var p = arr[i];
+      p.radius_bubble = undefined;
+      if (p.baseRadius === undefined) p.baseRadius = p.radius;
+      p.radius = Math.max(0.1, p.baseRadius * scale);
+      var inRepulse = p.repulseBrightUntil && now < p.repulseBrightUntil;
+      var inClick = p.clickBrightUntil && now < p.clickBrightUntil;
+      if (inRepulse || inClick) {
+        p.brightenAmount = 1;
+      } else {
+        if (p.brightenAmount > 0) {
+          p.brightenAmount *= 0.92;
+          if (p.brightenAmount < 0.02) p.brightenAmount = 0;
+        }
+      }
+      if (p.repulseBrightUntil && now >= p.repulseBrightUntil) p.repulseBrightUntil = undefined;
+      if (p.clickBrightUntil && now >= p.clickBrightUntil) p.clickBrightUntil = undefined;
+    }
+    rafId = requestAnimationFrame(pulseParticles);
+  }
+
+  audioEl.addEventListener('play', function onPlay() {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    if (!initAudioAnalyser()) return;
+    if (!rafId) pulseParticles();
+  });
+
+  // Start pulse loop so particles react as soon as music plays
+  pulseParticles();
+})();
 </script>
   </div>
 </div>
