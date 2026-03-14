@@ -26,10 +26,6 @@
   
 <body>
   <div id="particles-js"></div>
-  <div id="float-hints" class="float-hints" aria-hidden="true">
-    <span class="float-hint float-hint--left">click anywhere to start sound</span>
-    <span class="float-hint float-hint--right">click anywhere to start sound</span>
-  </div>
   <main>
     <div class="main-content">
       <nav class="navbar">
@@ -69,7 +65,7 @@
               
               <iframe 
                 style="border-radius:12px" 
-                src="https://open.spotify.com/embed/track/74o7t2HiarYExJ4HQX86me?utm_source=generator&theme=0" 
+                src="https://open.spotify.com/embed/track/5vgR8eJqKZYrXIl58wjviq?utm_source=generator" 
                 width="100%" 
                 height="80" 
                 frameborder="0" 
@@ -425,21 +421,9 @@
   function pauseAudio() { audioEl.pause(); }
   window.playAudio = playAudio;
   window.pauseAudio = pauseAudio;
-  audioEl.addEventListener('play', function() {
-    updatePlayPauseState();
-    document.body.classList.add('sound-started');
-  });
+  audioEl.addEventListener('play', updatePlayPauseState);
   audioEl.addEventListener('pause', updatePlayPauseState);
   updatePlayPauseState();
-
-  function tryStartMusic(e) {
-    if (e && e.type === 'click' && e.target.closest('.navbar')) return;
-    playAudio();
-    document.body.removeEventListener('click', tryStartMusic);
-    document.body.removeEventListener('keydown', tryStartMusic);
-  }
-  document.body.addEventListener('click', tryStartMusic);
-  document.body.addEventListener('keydown', tryStartMusic);
 
   // --- Audio-reactive particle pulse (BGM only) ---
   var audioCtx = null;
