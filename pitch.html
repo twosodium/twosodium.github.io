@@ -327,6 +327,7 @@
     <div class="row">
       <button class="btn accent" id="bnd-play">play</button>
       <button class="btn" id="bnd-replay" disabled>replay</button>
+      <button class="btn" id="bnd-dl" disabled>↓ wav</button>
       <button class="btn" id="bnd-btn-a" disabled>← closer to <span id="bnd-na">A</span></button>
       <button class="btn" id="bnd-btn-b" disabled>closer to <span id="bnd-nb">B</span> →</button>
     </div>
@@ -366,6 +367,7 @@
     <button class="btn" id="chord-replay" disabled>replay</button>
     <button class="btn accent" id="chord-submit" disabled>submit</button>
     <button class="btn" id="chord-new" style="display:none">new chord</button>
+    <button class="btn" id="chord-dl" disabled>↓ wav</button>
   </div>
 
   <div class="result" id="chord-result"></div>
@@ -411,6 +413,7 @@
     <button class="btn" id="mel-clear">clear</button>
     <button class="btn accent" id="mel-submit" disabled>submit</button>
     <button class="btn" id="mel-restart" style="display:none">restart</button>
+    <button class="btn" id="mel-dl" disabled>↓ wav</button>
   </div>
 
   <div class="result" id="mel-result"></div>
@@ -444,6 +447,7 @@
   <div class="row" style="margin-top:6px">
     <button class="btn accent" id="tune-submit" disabled>submit</button>
     <button class="btn" id="tune-new" style="display:none">new note</button>
+    <button class="btn" id="tune-dl" disabled>↓ wav</button>
   </div>
 
   <div class="result" id="tune-result"></div>
@@ -548,6 +552,7 @@ async function chordPlay() {
   document.getElementById('chord-new').style.display = 'none';
   document.getElementById('chord-submit').disabled = false;
   document.getElementById('chord-replay').disabled = false;
+  document.getElementById('chord-dl').disabled     = false;
 
   const playBtn = document.getElementById('chord-play-btn');
   playBtn.textContent = 'loading…'; playBtn.disabled = true;
@@ -649,7 +654,6 @@ const MG = { melody: [], input: [], busy: false, done: false, round: 0, startLen
 function melKeyClick(midi) {
   if (!MG.melody.length || MG.done) return;
   MG.input.push(midi);
-  sfPlay(midi, 'acoustic_grand_piano', 0.6);
   flashKey('mel-piano', midi, 'seq');
   updateMelInput();
   if (MG.input.length === MG.melody.length) {
@@ -686,6 +690,7 @@ async function melPlayback(melody) {
   MG.busy = false;
   document.getElementById('mel-play').disabled   = false;
   document.getElementById('mel-replay').disabled = false;
+  document.getElementById('mel-dl').disabled     = false;
 }
 
 function melUpdateRoundInfo() {
@@ -810,6 +815,7 @@ function tunePlay() {
   document.getElementById('tune-result').className   = 'result';
   document.getElementById('tune-new').style.display  = 'none';
   document.getElementById('tune-replay').disabled    = false;
+  document.getElementById('tune-dl').disabled        = false;
 
   const freq = midiToFreq(TG.midi) * Math.pow(2, TG.cents / 1200);
   playFreq(freq, 2.5);
@@ -957,10 +963,11 @@ function bndPlayNote() {
   playFreq(freq, 2.0);
 
   BG.waiting = true;
-  document.getElementById('bnd-btn-a').disabled = false;
-  document.getElementById('bnd-btn-b').disabled = false;
-  document.getElementById('bnd-play').disabled  = true;
+  document.getElementById('bnd-btn-a').disabled  = false;
+  document.getElementById('bnd-btn-b').disabled  = false;
+  document.getElementById('bnd-play').disabled   = true;
   document.getElementById('bnd-replay').disabled = false;
+  document.getElementById('bnd-dl').disabled     = false;
 }
 
 function bndRespond(isA) {
@@ -1041,6 +1048,92 @@ document.getElementById('bnd-replay').addEventListener('click', () => {
 });
 document.getElementById('bnd-btn-a').addEventListener('click', () => bndRespond(true));
 document.getElementById('bnd-btn-b').addEventListener('click', () => bndRespond(false));
+
+// ══════════════════════════════════════════════════════════════════════════
+// WAV DOWNLOAD
+// ══════════════════════════════════════════════════════════════════════════
+
+function encodeWav(audioBuffer) {
+  const samples    = audioBuffer.getChannelData(0);
+  const sampleRate = audioBuffer.sampleRate;
+  const pcm = new Int16Array(samples.length);
+  for (let i = 0; i < samples.length; i++) {
+    pcm[i] = Math.max(-32768, Math.min(32767, samples[i] * 32767));
+  }
+  const buf = new ArrayBuffer(44 + pcm.byteLength);
+  const v   = new DataView(buf);
+  const str = (s, o) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  str('RIFF', 0); v.setUint32(4, 36 + pcm.byteLength, true);
+  str('WAVE', 8); str('fmt ', 12);
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true);   // PCM
+  v.setUint16(22, 1, true);                               // mono
+  v.setUint32(24, sampleRate, true);
+  v.setUint32(28, sampleRate * 2, true);
+  v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+  str('data', 36); v.setUint32(40, pcm.byteLength, true);
+  new Int16Array(buf, 44).set(pcm);
+  return new Blob([buf], { type: 'audio/wav' });
+}
+
+function offlinePartials(offCtx, freq, startTime, duration) {
+  const partials = [[1,0.55],[2,0.22],[3,0.09],[4,0.04],[5,0.02],[6,0.01]];
+  partials.forEach(([ratio, amp]) => {
+    const osc = offCtx.createOscillator();
+    const g   = offCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq * ratio;
+    g.gain.setValueAtTime(0, startTime);
+    g.gain.linearRampToValueAtTime(amp, startTime + 0.008);
+    g.gain.exponentialRampToValueAtTime(amp * 0.35, startTime + 0.18);
+    g.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+    osc.connect(g); g.connect(offCtx.destination);
+    osc.start(startTime); osc.stop(startTime + duration + 0.05);
+  });
+}
+
+async function downloadWav(renderFn, totalDuration, filename) {
+  const sampleRate = 44100;
+  const offCtx = new OfflineAudioContext(1, Math.ceil(sampleRate * totalDuration), sampleRate);
+  renderFn(offCtx);
+  const blob = encodeWav(await offCtx.startRendering());
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename + '.wav';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// Per-game download functions
+
+document.getElementById('chord-dl').addEventListener('click', () => {
+  if (!CG.notes.length) return;
+  downloadWav(offCtx => {
+    CG.notes.forEach(m => offlinePartials(offCtx, midiToFreq(m), 0, 2.8));
+  }, 3.2, 'chord_' + CG.notes.map(m => NOTE_SF[m % 12]).join(''));
+});
+
+document.getElementById('mel-dl').addEventListener('click', () => {
+  if (!MG.melody.length) return;
+  const gap = 0.52, noteDur = 0.55;
+  const total = (MG.melody.length - 1) * gap + noteDur + 0.4;
+  downloadWav(offCtx => {
+    MG.melody.forEach((m, i) => offlinePartials(offCtx, midiToFreq(m), i * gap, noteDur));
+  }, total, 'melody');
+});
+
+document.getElementById('tune-dl').addEventListener('click', () => {
+  if (TG.midi === null) return;
+  const freq = midiToFreq(TG.midi) * Math.pow(2, TG.cents / 1200);
+  downloadWav(offCtx => offlinePartials(offCtx, freq, 0, 2.5), 2.8,
+    'out_of_tune_' + NOTE_SF[TG.midi % 12]);
+});
+
+document.getElementById('bnd-dl').addEventListener('click', () => {
+  if (BG.curCents === null) return;
+  const freq = 440 * Math.pow(2, (BG.curCents / 100 - 69) / 12);
+  downloadWav(offCtx => offlinePartials(offCtx, freq, 0, 2.0), 2.3, 'pitch_boundary');
+});
 </script>
 </body>
 </html>
