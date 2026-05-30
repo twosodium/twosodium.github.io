@@ -954,9 +954,7 @@ function bndUpdateMeter() {
 function bndPlayNote() {
   if (BG.waiting) return;
 
-  const mid    = (BG.low + BG.high) / 2;
-  const jitter = (Math.random() - 0.5) * 12;
-  BG.curCents  = mid + jitter;
+  BG.curCents = (BG.low + BG.high) / 2;
 
   const midiF = BG.curCents / 100;
   const freq  = 440 * Math.pow(2, (midiF - 69) / 12);
