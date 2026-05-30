@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>let's get pitchy</title>
+  <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #c7c7c7;
+      font-family: monospace;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 24px 0;
+    }
+
+    header .back {
+      color: #555;
+      font-size: 13px;
+      display: inline-block;
+      margin-bottom: 16px;
+      transition: color 0.15s;
+    }
+    header .back:hover { color: #a53f3c; }
+
+    header h1 {
+      color: #fff;
+      font-size: 26px;
+      font-weight: normal;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: #444;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .page-nav {
+      max-width: 680px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .page-nav a {
+      color: #444;
+      font-size: 12px;
+      transition: color 0.15s;
+    }
+    .page-nav a:hover { color: #e6d1ab; }
+
+    .game-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 24px 0;
+    }
+
+    .game-section + .game-section {
+      border-top: 1px solid #111;
+      margin-top: 56px;
+      padding-top: 56px;
+    }
+
+    .game-section:last-child { padding-bottom: 120px; }
+
+    h2 {
+      color: #e6d1ab;
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .desc {
+      color: #444;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    label {
+      color: #555;
+      font-size: 12px;
+    }
+
+    select {
+      background: #000;
+      border: 1px solid #282828;
+      color: #c7c7c7;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 5px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+    select:hover { border-color: #444; }
+
+    input[type="number"] {
+      background: #000;
+      border: 1px solid #282828;
+      color: #c7c7c7;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 5px 8px;
+      width: 110px;
+      outline: none;
+    }
+    input[type="number"]:hover { border-color: #444; }
+    input[type="number"]:focus { border-color: #555; }
+
+    .btn {
+      background: none;
+      border: 1px solid #282828;
+      color: #c7c7c7;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .btn:hover:not(:disabled) { border-color: #555; color: #fff; }
+    .btn:disabled { opacity: 0.3; cursor: default; }
+
+    .btn.accent {
+      border-color: #6b2b28;
+      color: #e6d1ab;
+    }
+    .btn.accent:hover:not(:disabled) {
+      background: #a53f3c;
+      border-color: #a53f3c;
+      color: #fff;
+    }
+
+    .btn.on {
+      background: #a53f3c;
+      border-color: #a53f3c;
+      color: #fff;
+    }
+
+    .sublabel {
+      color: #333;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    /* Note grid */
+    .note-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .nb {
+      background: none;
+      border: 1px solid #222;
+      color: #c7c7c7;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 7px 10px;
+      cursor: pointer;
+      min-width: 42px;
+      text-align: center;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+    }
+    .nb:hover:not(:disabled) { border-color: #555; }
+    .nb:disabled { opacity: 0.25; cursor: default; }
+    .nb.sel { background: #3a1f1e; border-color: #a53f3c; color: #e6d1ab; }
+    .nb.hit { background: #1e3a1e; border-color: #3a7a3a; color: #7acc7a; }
+    .nb.miss { border-color: #3a7a3a; color: #3a7a3a; }
+    .nb.err { background: #3a1f1e; border-color: #6b2b28; color: #cc5555; }
+
+    /* Result */
+    .result {
+      font-size: 12px;
+      line-height: 1.9;
+      min-height: 20px;
+      margin-top: 14px;
+    }
+    .result.ok { color: #5a9a5a; }
+    .result.bad { color: #cc5555; }
+    .result.info { color: #888; }
+
+    /* Piano keyboard */
+    .piano-scroll { overflow-x: auto; margin-bottom: 14px; }
+
+    .piano {
+      position: relative;
+      height: 110px;
+      flex-shrink: 0;
+    }
+
+    .wk {
+      position: absolute;
+      width: 34px;
+      height: 110px;
+      background: #d8d8d8;
+      border: 1px solid #666;
+      cursor: pointer;
+      z-index: 1;
+      top: 0;
+      transition: background 0.08s;
+    }
+    .wk:hover { background: #eee; }
+    .wk.lit { background: #c8a060 !important; }
+    .wk.seq { background: #a53f3c !important; }
+
+    .bk {
+      position: absolute;
+      width: 22px;
+      height: 68px;
+      background: #111;
+      border: 1px solid #000;
+      cursor: pointer;
+      z-index: 2;
+      top: 0;
+      transition: background 0.08s;
+    }
+    .bk:hover { background: #2a2a2a; }
+    .bk.lit { background: #8a6030 !important; }
+    .bk.seq { background: #7a2a28 !important; }
+
+    /* Boundary meter */
+    .b-meter-wrap { margin: 16px 0 6px; }
+
+    .b-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #444;
+      margin-bottom: 4px;
+    }
+
+    .b-meter {
+      position: relative;
+      height: 20px;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+    }
+
+    .b-center {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: #444;
+    }
+
+    .b-marker {
+      position: absolute;
+      top: -2px;
+      width: 2px;
+      height: calc(100% + 4px);
+      background: #a53f3c;
+      transition: left 0.3s;
+    }
+
+    .trial-line {
+      font-size: 11px;
+      color: #333;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="./index.html"><- twosodium</a>
+  <h1>Let's get pitchy</h1>
+</header>
+
+<nav class="page-nav">
+  <a href="#game-boundary">01</a>
+  <a href="#game-chord">02</a>
+  <a href="#game-melody">03</a>
+  <a href="#game-tune">04</a>
+</nav>
+
+
+<section class="game-section" id="game-boundary">
+  <h2>Is my pitch your pitch?</h2>
+  <p class="desc">Inspired by <a href="https://ismy.blue">[Is my blue your blue?]</a>
+  </p>
+
+  <div class="row">
+    <label>note pair</label>
+    <select id="bnd-a"></select>
+    <select id="bnd-b" style="display:none"></select>
+    <button class="btn accent" id="bnd-start">start</button>
+  </div>
+
+  <div id="bnd-game" style="display:none">
+    <p class="trial-line" id="bnd-trial" style="margin-bottom:14px"></p>
+
+    <div class="b-meter-wrap" id="bnd-meter-wrap" style="display:none">
+      <div class="b-labels">
+        <span id="bnd-lbl-a">A</span>
+        <span id="bnd-lbl-b">B</span>
+      </div>
+      <div class="b-meter">
+        <div class="b-center" id="bnd-center"></div>
+        <div class="b-marker" id="bnd-marker"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn accent" id="bnd-play">play</button>
+      <button class="btn" id="bnd-replay" disabled>replay</button>
+      <button class="btn" id="bnd-btn-a" disabled>← closer to <span id="bnd-na">A</span></button>
+      <button class="btn" id="bnd-btn-b" disabled>closer to <span id="bnd-nb">B</span> →</button>
+    </div>
+  </div>
+
+  <div class="result" id="bnd-result"></div>
+</section>
+
+<section class="game-section" id="game-chord">
+  <h2>Chord ID</h2>
+  <p class="desc">
+  </p>
+
+  <div class="row">
+    <label>n notes</label>
+    <select id="chord-n">
+      <option value="2">2</option>
+      <option value="3" selected>3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+    <label>soundfont</label>
+    <select id="chord-sf">
+      <option value="acoustic_grand_piano">piano</option>
+      <option value="string_ensemble_1">strings</option>
+      <option value="lead_2_sawtooth">synth</option>
+      <option value="brass_section">brass</option>
+    </select>
+    <button class="btn accent" id="chord-play-btn">play chord</button>
+  </div>
+
+  <p class="sublabel"></p>
+  <div class="note-grid" id="chord-grid"></div>
+
+  <div class="row">
+    <button class="btn" id="chord-replay" disabled>replay</button>
+    <button class="btn accent" id="chord-submit" disabled>submit</button>
+    <button class="btn" id="chord-new" style="display:none">new chord</button>
+  </div>
+
+  <div class="result" id="chord-result"></div>
+</section>
+
+<section class="game-section" id="game-melody">
+  <h2>Memory test</h2>
+  <p class="desc">
+    Reproduce the melody on the keyboard
+  </p>
+
+  <div class="row">
+    <label>start</label>
+    <select id="mel-len">
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected>5</option>
+      <option value="6">6</option>
+      <option value="8">8</option>
+    </select>
+    <label>add per round</label>
+    <select id="mel-add">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3" selected>3</option>
+      <option value="5">5</option>
+    </select>
+    <button class="btn accent" id="mel-play">start</button>
+    <button class="btn" id="mel-replay" disabled>replay</button>
+  </div>
+
+  <p class="sublabel" id="mel-round-info" style="display:none; color:#555; margin-bottom:12px"></p>
+
+  <div class="piano-scroll">
+    <div class="piano" id="mel-piano"></div>
+  </div>
+
+  <p class="sublabel">
+    You selected:&nbsp;<span id="mel-input" style="color:#c7c7c7; letter-spacing:1px"></span>
+  </p>
+
+  <div class="row" style="margin-top:10px">
+    <button class="btn" id="mel-clear">clear</button>
+    <button class="btn accent" id="mel-submit" disabled>submit</button>
+    <button class="btn" id="mel-restart" style="display:none">restart</button>
+  </div>
+
+  <div class="result" id="mel-result"></div>
+</section>
+
+<section class="game-section" id="game-tune">
+  <h2>Out of tune</h2>
+  <p class="desc">
+    This piano is a little broken. Which note is the played note closest to?
+  </p>
+
+  <div class="row">
+    <button class="btn accent" id="tune-play">play note</button>
+    <button class="btn" id="tune-replay" disabled>replay</button>
+  </div>
+
+  <p class="sublabel"></p>
+  <div class="note-grid" id="tune-grid"></div>
+
+  <div class="row" style="margin-bottom:14px">
+    <button class="btn" id="tune-sharp" disabled>It's sharp ♯</button>
+    <button class="btn" id="tune-flat" disabled>It's flat ♭</button>
+  </div>
+
+  <div class="row">
+    <label>Exact frequency guess:</label>
+    <input type="number" id="tune-hz" placeholder="e.g. 442.1" step="0.1" disabled>
+    <span style="font-size:11px; color:#333"></span>
+  </div>
+
+  <div class="row" style="margin-top:6px">
+    <button class="btn accent" id="tune-submit" disabled>submit</button>
+    <button class="btn" id="tune-new" style="display:none">new note</button>
+  </div>
+
+  <div class="result" id="tune-result"></div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/soundfont-player@0.12.0/dist/soundfont-player.min.js"></script>
+<script>
+'use strict';
+
+// ─── Note constants ────────────────────────────────────────────────────────
+
+const NOTE = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const NOTE_SF = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const IS_BLACK = [false,true,false,true,false,false,true,false,true,false,true,false];
+
+function midiToFreq(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+function midiToSfName(m) { return NOTE_SF[m % 12] + (Math.floor(m / 12) - 1); }
+function noteLabel(m) { return NOTE[m % 12]; }
+function shuffle(a) {
+  const b = [...a];
+  for (let i = b.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [b[i], b[j]] = [b[j], b[i]];
+  }
+  return b;
+}
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ─── Audio context ─────────────────────────────────────────────────────────
+
+let _ctx = null;
+function ctx() {
+  if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+  if (_ctx.state === 'suspended') _ctx.resume();
+  return _ctx;
+}
+
+function playFreq(freq, dur = 2.0) {
+  const ac = ctx();
+  const master = ac.createGain();
+  master.connect(ac.destination);
+  const partials = [[1, 0.55],[2, 0.22],[3, 0.09],[4, 0.04],[5, 0.02],[6, 0.01]];
+  const now = ac.currentTime;
+  partials.forEach(([ratio, amp]) => {
+    const osc = ac.createOscillator();
+    const g   = ac.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq * ratio;
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(amp, now + 0.008);
+    g.gain.exponentialRampToValueAtTime(amp * 0.35, now + 0.18);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+    osc.connect(g);
+    g.connect(master);
+    osc.start(now);
+    osc.stop(now + dur + 0.05);
+  });
+}
+
+const sfCache = {};
+async function sfLoad(name) {
+  if (sfCache[name]) return sfCache[name];
+  sfCache[name] = await Soundfont.instrument(ctx(), name, {
+    format: 'mp3', soundfont: 'MusyngKite',
+  });
+  return sfCache[name];
+}
+function sfPlay(midi, instName, dur = 1.5) {
+  sfLoad(instName).then(inst => {
+    inst.play(midiToSfName(midi), ctx().currentTime, { duration: dur });
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// GAME 1 — CHORD IDENTIFICATION
+// ══════════════════════════════════════════════════════════════════════════
+
+const CG = { notes: [], done: false };
+
+(function buildChordGrid() {
+  const g = document.getElementById('chord-grid');
+  NOTE.forEach((name, i) => {
+    const b = document.createElement('button');
+    b.className = 'nb'; b.textContent = name; b.dataset.i = i;
+    b.addEventListener('click', () => {
+      if (CG.done) return;
+      b.classList.toggle('sel');
+    });
+    g.appendChild(b);
+  });
+})();
+
+async function chordPlay() {
+  const n  = +document.getElementById('chord-n').value;
+  const sf = document.getElementById('chord-sf').value;
+
+  CG.done = false;
+  const pool = [60,61,62,63,64,65,66,67,68,69,70,71];
+  CG.notes = shuffle(pool).slice(0, n);
+
+  document.querySelectorAll('#chord-grid .nb').forEach(b =>
+    b.classList.remove('sel','hit','err','miss'));
+  document.getElementById('chord-result').textContent = '';
+  document.getElementById('chord-result').className = 'result';
+  document.getElementById('chord-new').style.display = 'none';
+  document.getElementById('chord-submit').disabled = false;
+  document.getElementById('chord-replay').disabled = false;
+
+  const playBtn = document.getElementById('chord-play-btn');
+  playBtn.textContent = 'loading…'; playBtn.disabled = true;
+  let inst;
+  try { inst = await sfLoad(sf); } catch(e) {}
+  playBtn.textContent = 'play chord'; playBtn.disabled = false;
+
+  if (inst) {
+    const now = ctx().currentTime;
+    CG.notes.forEach(m => inst.play(midiToSfName(m), now, { duration: 2.8 }));
+  }
+}
+
+function chordSubmit() {
+  if (!CG.notes.length) return;
+  CG.done = true;
+
+  const actual   = new Set(CG.notes.map(m => m % 12));
+  const selected = new Set(
+    [...document.querySelectorAll('#chord-grid .nb.sel')].map(b => +b.dataset.i)
+  );
+
+  let tp = 0;
+  document.querySelectorAll('#chord-grid .nb').forEach(b => {
+    const i = +b.dataset.i;
+    const isA = actual.has(i), isS = selected.has(i);
+    b.classList.remove('sel');
+    if (isA && isS)  { b.classList.add('hit'); tp++; }
+    else if (isA)    { b.classList.add('miss'); }
+    else if (isS)    { b.classList.add('err'); }
+  });
+
+  const fp = [...selected].filter(i => !actual.has(i)).length;
+  const fn = [...actual].filter(i => !selected.has(i)).length;
+  const res = document.getElementById('chord-result');
+
+  if (tp === actual.size && fp === 0) {
+    res.textContent = `perfect. all ${actual.size} notes correct.`;
+    res.className = 'result ok';
+  } else {
+    const parts = [`${tp}/${actual.size} correct`];
+    if (fp) parts.push(`${fp} false positive${fp > 1 ? 's' : ''}`);
+    if (fn) parts.push(`missed ${fn}`);
+    res.textContent = parts.join(' · ');
+    res.className = 'result bad';
+    res.innerHTML += `<br><span style="color:#444">actual: ${
+      CG.notes.map(m => NOTE[m % 12]).join(' ')
+    }</span>`;
+  }
+
+  document.getElementById('chord-submit').disabled = true;
+  document.getElementById('chord-new').style.display = 'inline-block';
+}
+
+document.getElementById('chord-play-btn').addEventListener('click', chordPlay);
+document.getElementById('chord-replay').addEventListener('click', async () => {
+  const sf = document.getElementById('chord-sf').value;
+  const inst = await sfLoad(sf);
+  const now = ctx().currentTime;
+  CG.notes.forEach(m => inst.play(midiToSfName(m), now, { duration: 2.8 }));
+});
+document.getElementById('chord-submit').addEventListener('click', chordSubmit);
+document.getElementById('chord-new').addEventListener('click', chordPlay);
+
+const MG = { melody: [], input: [], busy: false, done: false, round: 0, startLen: 5, addPerRound: 3 };
+
+(function buildMelodyPiano() {
+  const piano = document.getElementById('mel-piano');
+  const start = 60, count = 24; // C4–B5
+
+  const wpos = {};
+  let wc = 0;
+  for (let i = 0; i < count; i++) {
+    const m = start + i;
+    if (!IS_BLACK[m % 12]) { wpos[m] = wc * 34; wc++; }
+  }
+
+  piano.style.width  = (wc * 34) + 'px';
+  piano.style.height = '110px';
+
+  for (let i = 0; i < count; i++) {
+    const m = start + i;
+    const black = IS_BLACK[m % 12];
+    const key = document.createElement('div');
+    key.dataset.midi = m;
+    key.className = black ? 'bk' : 'wk';
+
+    if (black) {
+      key.style.left = (wpos[m - 1] + 34 - 11) + 'px';
+    } else {
+      key.style.left = wpos[m] + 'px';
+    }
+
+    key.addEventListener('click', () => melKeyClick(m));
+    piano.appendChild(key);
+  }
+})();
+
+function melKeyClick(midi) {
+  if (!MG.melody.length || MG.done) return;
+  MG.input.push(midi);
+  sfPlay(midi, 'acoustic_grand_piano', 0.6);
+  flashKey('mel-piano', midi, 'seq');
+  updateMelInput();
+  if (MG.input.length === MG.melody.length) {
+    document.getElementById('mel-submit').disabled = false;
+  }
+}
+
+function updateMelInput() {
+  document.getElementById('mel-input').textContent =
+    MG.input.map(m => NOTE[m % 12] + (Math.floor(m / 12) - 1)).join(' ');
+}
+
+function flashKey(pianoId, midi, cls, ms = 350) {
+  const key = document.querySelector(`#${pianoId} [data-midi="${midi}"]`);
+  if (!key) return;
+  key.classList.add(cls);
+  setTimeout(() => key.classList.remove(cls), ms);
+}
+
+async function melPlayback(melody) {
+  MG.busy = true;
+  document.getElementById('mel-play').disabled    = true;
+  document.getElementById('mel-replay').disabled  = true;
+  document.getElementById('mel-submit').disabled  = true;
+
+  await sfLoad('acoustic_grand_piano');
+
+  for (let i = 0; i < melody.length; i++) {
+    if (i > 0) await sleep(520);
+    sfPlay(melody[i], 'acoustic_grand_piano', 0.55);
+  }
+
+  await sleep(500);
+  MG.busy = false;
+  document.getElementById('mel-play').disabled   = false;
+  document.getElementById('mel-replay').disabled = false;
+}
+
+function melUpdateRoundInfo() {
+  const info = document.getElementById('mel-round-info');
+  info.style.display = 'block';
+  info.textContent = `round ${MG.round}  ·  ${MG.melody.length} notes`;
+}
+
+function melStart() {
+  MG.startLen    = +document.getElementById('mel-len').value;
+  MG.addPerRound = +document.getElementById('mel-add').value;
+  MG.round       = 1;
+  MG.melody      = Array.from({ length: MG.startLen }, () => 60 + Math.floor(Math.random() * 24));
+  MG.input       = [];
+  MG.done        = false;
+
+  document.getElementById('mel-submit').disabled    = true;
+  document.getElementById('mel-restart').style.display = 'none';
+  document.getElementById('mel-result').textContent = '';
+  document.getElementById('mel-result').className   = 'result';
+  updateMelInput();
+  melUpdateRoundInfo();
+  melPlayback(MG.melody);
+}
+
+function melSubmit() {
+  if (MG.done || MG.busy) return;
+  MG.done = true;
+
+  const perfect = MG.melody.every((m, i) => m === MG.input[i]);
+  const res     = document.getElementById('mel-result');
+
+  if (perfect) {
+    res.textContent = `round ${MG.round} ✓  —  +${MG.addPerRound} notes`;
+    res.className   = 'result ok';
+
+    setTimeout(() => {
+      MG.round++;
+      const newNotes = Array.from({ length: MG.addPerRound }, () => 60 + Math.floor(Math.random() * 24));
+      MG.melody = [...MG.melody, ...newNotes];
+      MG.input = [];
+      MG.done  = false;
+      res.textContent = '';
+      res.className   = 'result';
+      document.getElementById('mel-submit').disabled = true;
+      updateMelInput();
+      melUpdateRoundInfo();
+      melPlayback(MG.melody);
+    }, 1400);
+  } else {
+    let correct = 0;
+    MG.melody.forEach((m, i) => { if (m === MG.input[i]) correct++; });
+    const actual = MG.melody.map(m => NOTE[m % 12] + (Math.floor(m / 12) - 1)).join(' ');
+    const rounds = MG.round === 1 ? 'round 1' : `${MG.round} rounds`;
+    res.innerHTML =
+      `out on round ${MG.round} (${MG.melody.length} notes)  ·  ${correct}/${MG.melody.length} correct` +
+      `<br><span style="color:#444">actual: ${actual}</span>`;
+    res.className = 'result bad';
+    document.getElementById('mel-submit').disabled    = true;
+    document.getElementById('mel-restart').style.display = 'inline-block';
+  }
+}
+
+document.getElementById('mel-play').addEventListener('click', melStart);
+document.getElementById('mel-replay').addEventListener('click', () => {
+  if (MG.busy || !MG.melody.length) return;
+  MG.input = [];
+  MG.done  = false;
+  document.getElementById('mel-submit').disabled = true;
+  updateMelInput();
+  melPlayback(MG.melody);
+});
+document.getElementById('mel-clear').addEventListener('click', () => {
+  if (MG.done) return;
+  MG.input = [];
+  document.getElementById('mel-submit').disabled = true;
+  updateMelInput();
+});
+document.getElementById('mel-submit').addEventListener('click', melSubmit);
+document.getElementById('mel-restart').addEventListener('click', melStart);
+
+const TG = { midi: null, cents: null, done: false, selNote: null, selSF: null };
+
+(function buildTuneGrid() {
+  const g = document.getElementById('tune-grid');
+  NOTE.forEach((name, i) => {
+    const b = document.createElement('button');
+    b.className = 'nb'; b.textContent = name; b.dataset.i = i;
+    b.disabled = true;
+    b.addEventListener('click', () => {
+      if (TG.done) return;
+      document.querySelectorAll('#tune-grid .nb').forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel');
+      TG.selNote = i;
+      document.getElementById('tune-sharp').disabled = false;
+      document.getElementById('tune-flat').disabled  = false;
+      document.getElementById('tune-hz').disabled    = false;
+      document.getElementById('tune-submit').disabled = false;
+    });
+    g.appendChild(b);
+  });
+})();
+
+function tunePlay() {
+  TG.midi  = 60 + Math.floor(Math.random() * 12);
+  TG.cents = (15 + Math.random() * 35) * (Math.random() < 0.5 ? 1 : -1);
+  TG.done  = false;
+  TG.selNote = null;
+  TG.selSF   = null;
+
+  document.querySelectorAll('#tune-grid .nb').forEach(b => {
+    b.classList.remove('sel','hit','err'); b.disabled = false;
+  });
+  document.getElementById('tune-sharp').classList.remove('on');
+  document.getElementById('tune-flat').classList.remove('on');
+  document.getElementById('tune-sharp').disabled = true;
+  document.getElementById('tune-flat').disabled  = true;
+  document.getElementById('tune-hz').value    = '';
+  document.getElementById('tune-hz').disabled = true;
+  document.getElementById('tune-submit').disabled = true;
+  document.getElementById('tune-result').textContent = '';
+  document.getElementById('tune-result').className   = 'result';
+  document.getElementById('tune-new').style.display  = 'none';
+  document.getElementById('tune-replay').disabled    = false;
+
+  const freq = midiToFreq(TG.midi) * Math.pow(2, TG.cents / 1200);
+  playFreq(freq, 2.5);
+}
+
+document.getElementById('tune-sharp').addEventListener('click', function() {
+  this.classList.add('on');
+  document.getElementById('tune-flat').classList.remove('on');
+  TG.selSF = 'sharp';
+});
+document.getElementById('tune-flat').addEventListener('click', function() {
+  this.classList.add('on');
+  document.getElementById('tune-sharp').classList.remove('on');
+  TG.selSF = 'flat';
+});
+
+function tuneSubmit() {
+  TG.done = true;
+
+  const noteOk = TG.selNote === TG.midi % 12;
+  const trueDir = TG.cents > 0 ? 'sharp' : 'flat';
+  const sfOk    = TG.selSF === trueDir;
+
+  const actualHz = midiToFreq(TG.midi) * Math.pow(2, TG.cents / 1200);
+
+  document.querySelectorAll('#tune-grid .nb').forEach(b => {
+    const i = +b.dataset.i;
+    b.classList.remove('sel');
+    if (i === TG.midi % 12) b.classList.add('hit');
+    else if (i === TG.selNote) b.classList.add('err');
+  });
+
+  const lines = [];
+  if (noteOk && sfOk) {
+    lines.push(`correct — ${NOTE[TG.midi % 12]} ${trueDir === 'sharp' ? '♯' : '♭'}`);
+  } else {
+    lines.push(`the note was ${NOTE[TG.midi % 12]} ${trueDir === 'sharp' ? '♯ (sharp)' : '♭ (flat)'}`);
+  }
+  lines.push(`detune: ${TG.cents > 0 ? '+' : ''}${TG.cents.toFixed(1)} cents`);
+  lines.push(`actual: ${actualHz.toFixed(3)} hz`);
+
+  const hzInput = parseFloat(document.getElementById('tune-hz').value);
+  if (!isNaN(hzInput)) {
+    const errHz    = Math.abs(hzInput - actualHz);
+    const errCents = 1200 * Math.log2(hzInput / actualHz);
+    lines.push(`your guess: ${hzInput} hz — off by ${errHz.toFixed(3)} hz (${Math.abs(errCents).toFixed(1)} cents)`);
+  }
+
+  const res = document.getElementById('tune-result');
+  res.innerHTML   = lines.join('<br>');
+  res.className   = (noteOk && sfOk) ? 'result ok' : 'result bad';
+
+  document.getElementById('tune-submit').disabled    = true;
+  document.getElementById('tune-new').style.display  = 'inline-block';
+}
+
+document.getElementById('tune-play').addEventListener('click', tunePlay);
+document.getElementById('tune-replay').addEventListener('click', () => {
+  if (TG.midi === null) return;
+  const freq = midiToFreq(TG.midi) * Math.pow(2, TG.cents / 1200);
+  playFreq(freq, 2.5);
+});
+document.getElementById('tune-submit').addEventListener('click', tuneSubmit);
+document.getElementById('tune-new').addEventListener('click', tunePlay);
+
+const BG = {
+  noteA: null, noteB: null,
+  low: null, high: null,
+  trial: 0, maxTrials: 10,
+  curCents: null,
+  waiting: false,
+};
+
+const BND_PAIRS = (() => {
+  const pairs = [];
+  for (let m = 48; m <= 82; m++) {
+    pairs.push([m, m + 1]);
+  }
+  return pairs;
+})();
+
+(function buildBoundarySelectors() {
+  const sel = document.getElementById('bnd-a');
+  BND_PAIRS.forEach(([a, b], i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    const nameA = NOTE[a % 12] + (Math.floor(a / 12) - 1);
+    const nameB = NOTE[b % 12] + (Math.floor(b / 12) - 1);
+    opt.textContent = `${nameA} / ${nameB}`;
+    if (a === 60) opt.selected = true;
+    sel.appendChild(opt);
+  });
+})();
+
+function bndStart() {
+  const pairIdx = +document.getElementById('bnd-a').value;
+  const [na, nb] = BND_PAIRS[pairIdx];
+
+  BG.noteA   = na;
+  BG.noteB   = nb;
+  BG.low     = BG.noteA * 100; // working in "midi-cents" (midi * 100)
+  BG.high    = BG.noteB * 100;
+  BG.trial   = 0;
+  BG.waiting = false;
+
+  const lA = NOTE[BG.noteA % 12] + (Math.floor(BG.noteA / 12) - 1);
+  const lB = NOTE[BG.noteB % 12] + (Math.floor(BG.noteB / 12) - 1);
+  document.getElementById('bnd-lbl-a').textContent = lA;
+  document.getElementById('bnd-lbl-b').textContent = lB;
+  document.getElementById('bnd-na').textContent    = lA;
+  document.getElementById('bnd-nb').textContent    = lB;
+  document.getElementById('bnd-game').style.display = 'block';
+  document.getElementById('bnd-result').textContent = '';
+  document.getElementById('bnd-result').className   = 'result';
+  document.getElementById('bnd-btn-a').disabled  = true;
+  document.getElementById('bnd-btn-b').disabled  = true;
+  document.getElementById('bnd-replay').disabled = true;
+  document.getElementById('bnd-play').disabled   = false;
+
+  document.getElementById('bnd-meter-wrap').style.display = 'none';
+  bndUpdateTrial();
+}
+
+function bndUpdateTrial() {
+  document.getElementById('bnd-trial').textContent =
+    `trial ${BG.trial + 1} / ${BG.maxTrials}`;
+}
+
+function bndUpdateMeter() {
+  const total      = BG.noteB * 100 - BG.noteA * 100;
+  const userCents  = (BG.low + BG.high) / 2;
+  const markerPct  = ((userCents - BG.noteA * 100) / total) * 100;
+
+  document.getElementById('bnd-marker').style.left = markerPct + '%';
+  document.getElementById('bnd-center').style.left = '50%';
+}
+
+function bndPlayNote() {
+  if (BG.waiting) return;
+
+  const mid    = (BG.low + BG.high) / 2;
+  const jitter = (Math.random() - 0.5) * 12;
+  BG.curCents  = mid + jitter;
+
+  const midiF = BG.curCents / 100;
+  const freq  = 440 * Math.pow(2, (midiF - 69) / 12);
+  playFreq(freq, 2.0);
+
+  BG.waiting = true;
+  document.getElementById('bnd-btn-a').disabled = false;
+  document.getElementById('bnd-btn-b').disabled = false;
+  document.getElementById('bnd-play').disabled  = true;
+  document.getElementById('bnd-replay').disabled = false;
+}
+
+function bndRespond(isA) {
+  if (!BG.waiting) return;
+  BG.waiting = false;
+
+  if (isA) BG.low  = BG.curCents;
+  else      BG.high = BG.curCents;
+
+  BG.trial++;
+
+  document.getElementById('bnd-btn-a').disabled = true;
+  document.getElementById('bnd-btn-b').disabled = true;
+  document.getElementById('bnd-replay').disabled = true;
+
+  const rangeLeft = BG.high - BG.low; // in midi-cents
+  const done = BG.trial >= BG.maxTrials || rangeLeft < 8;
+
+  if (done) {
+    bndFinish();
+  } else {
+    bndUpdateTrial();
+    document.getElementById('bnd-play').disabled = false;
+  }
+}
+
+function bndFinish() {
+  document.getElementById('bnd-play').disabled = true;
+  document.getElementById('bnd-trial').textContent = '';
+
+  const userCents = (BG.low + BG.high) / 2; // user boundary in midi-cents
+  const trueCents = (BG.noteA + BG.noteB) * 50; // true midpoint
+
+  const diffCents = userCents - trueCents;
+
+  const userMidi  = userCents / 100;
+  const trueMidi  = trueCents / 100;
+  const userHz    = 440 * Math.pow(2, (userMidi - 69) / 12);
+  const trueHz    = 440 * Math.pow(2, (trueMidi - 69) / 12);
+
+  const nA = NOTE[BG.noteA % 12] + (Math.floor(BG.noteA / 12) - 1);
+  const nB = NOTE[BG.noteB % 12] + (Math.floor(BG.noteB / 12) - 1);
+
+  let biasLine;
+  const absDiff = Math.abs(diffCents);
+  if (absDiff < 8) {
+    biasLine = 'Your boundary is right at the true midpoint! A true pitcher';
+  } else if (diffCents > 0) {
+    biasLine = `Biased toward ${nA} by ${absDiff.toFixed(0)} cents; your boundary sits sharp of the midpoint.`;
+  } else {
+    biasLine = `Biased toward ${nB} by ${absDiff.toFixed(0)} cents; your boundary sits flat of the midpoint.`;
+  }
+
+  // Reveal and populate the meter now that we're done
+  document.getElementById('bnd-meter-wrap').style.display = 'block';
+  document.getElementById('bnd-lbl-a').textContent =
+    NOTE[BG.noteA % 12] + (Math.floor(BG.noteA / 12) - 1);
+  document.getElementById('bnd-lbl-b').textContent =
+    NOTE[BG.noteB % 12] + (Math.floor(BG.noteB / 12) - 1);
+  bndUpdateMeter();
+
+  const res = document.getElementById('bnd-result');
+  res.innerHTML = [
+    `after ${BG.trial} trials:`,
+    `your boundary: ${userHz.toFixed(1)} hz`,
+    `true midpoint: ${trueHz.toFixed(1)} hz&nbsp;&nbsp;(${diffCents > 0 ? '+' : ''}${diffCents.toFixed(0)} cents)`,
+    biasLine,
+  ].join('<br>');
+  res.className = 'result info';
+}
+
+document.getElementById('bnd-start').addEventListener('click', bndStart);
+document.getElementById('bnd-play').addEventListener('click', bndPlayNote);
+document.getElementById('bnd-replay').addEventListener('click', () => {
+  if (BG.curCents === null) return;
+  const freq = 440 * Math.pow(2, (BG.curCents / 100 - 69) / 12);
+  playFreq(freq, 2.0);
+});
+document.getElementById('bnd-btn-a').addEventListener('click', () => bndRespond(true));
+document.getElementById('bnd-btn-b').addEventListener('click', () => bndRespond(false));
+</script>
+</body>
+</html>
