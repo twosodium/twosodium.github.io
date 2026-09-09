@@ -65,7 +65,7 @@
               
               <iframe 
                 style="border-radius:12px" 
-                src="https://open.spotify.com/embed/track/5vgR8eJqKZYrXIl58wjviq?utm_source=generator" 
+                src="https://open.spotify.com/embed/track/6y4tGsxX0dQLxOYeQfO0r8?utm_source=generator" 
                 width="100%" 
                 height="80" 
                 frameborder="0" 
@@ -103,9 +103,9 @@
             <audio id="music" loop>
               <source src="./assets/8bit_lacrimosa.mp3" type="audio/mp3">
             </audio>
-            <button id="btn-play" onclick="playAudio()" type="button" title="Play"><img src="./assets/images/play.png" alt="Play" class="music-btn-icon"></button>
-            <button id="btn-pause" onclick="pauseAudio()" type="button" title="Pause"><img src="./assets/images/pause.png" alt="Pause" class="music-btn-icon"></button>
-            <span class="music-text">BGM: Requiem (Verdi), "Lacrimosa," my remix</span>
+            <button id="btn-restart" onclick="restartAudio()" type="button" title="Back to beginning"><img src="./assets/images/restart.svg" alt="Back to beginning" class="music-btn-icon"></button>
+            <button id="btn-toggle" onclick="toggleAudio()" type="button" title="Play"><img id="btn-toggle-icon" src="./assets/images/play.svg" alt="Play" class="music-btn-icon"></button>
+            <span class="music-text">BGM: Requiem (Verdi), "Lacrimosa" (or is it?)</span>
           </div>
         
       </article>
@@ -187,6 +187,35 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="projects">
+              <a href="https://github.com/twosodium/memowrite">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/memowrite.png" width="100" alt="social_radio" loading="lazy">
+                </figure>
+                <h3 class="project-title">memowrite</h3>
+                <p class="project-subtitle">novel planning/writing tool with integrated wiki</p>
+                <p class="project-category">projects</p>
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="projects">
+              <a href="https://devpost.com/software/asdf-596pqz">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/resonance.png" width="100" alt="resonance" loading="lazy">
+                </figure>
+                <h3 class="project-title">resonance</h3>
+                <p class="project-subtitle">research assistant tool for TreeHacks 2026</p>
+                <p class="project-category">projects</p>
+              </a>
+            </li>
+
+
+            <li class="project-item  active" data-filter-item data-category="projects">
               <a href="https://devpost.com/software/asdf-596pqz">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -255,6 +284,21 @@
                 <p class="project-category">projects</p>
               </a>
             </li>
+
+            <li class="project-item  active" data-filter-item data-category="projects">
+              <a href="https://github.com/twosodium/social_radio">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/cli_radio.png" width="100" alt="social_radio" loading="lazy">
+                </figure>
+                <h3 class="project-title">social_radio</h3>
+                <p class="project-subtitle">CLI radio player with Discord rich presence</p>
+                <p class="project-category">projects</p>
+              </a>
+            </li>
+
 
             <li class="project-item  active" data-filter-item data-category="projects">
               <a href="https://github.com/twosodium/stanfordhungry">
@@ -410,17 +454,24 @@
   if (!audioEl) return;
   audioEl.volume = 0.2;
 
-  var btnPlay = document.getElementById('btn-play');
-  var btnPause = document.getElementById('btn-pause');
+  var btnToggle = document.getElementById('btn-toggle');
+  var toggleIcon = document.getElementById('btn-toggle-icon');
   function updatePlayPauseState() {
     var playing = !audioEl.paused;
-    if (btnPlay) btnPlay.classList.toggle('active', playing);
-    if (btnPause) btnPause.classList.toggle('active', !playing);
+    if (toggleIcon) {
+      toggleIcon.src = playing ? './assets/images/pause.svg' : './assets/images/play.svg';
+      toggleIcon.alt = playing ? 'Pause' : 'Play';
+    }
+    if (btnToggle) btnToggle.title = playing ? 'Pause' : 'Play';
   }
-  function playAudio() { audioEl.play().catch(function() {}); }
-  function pauseAudio() { audioEl.pause(); }
-  window.playAudio = playAudio;
-  window.pauseAudio = pauseAudio;
+  function toggleAudio() {
+    if (audioEl.paused) audioEl.play().catch(function() {});
+    else audioEl.pause();
+  }
+  // Rewind to the start; leave the play/pause status untouched.
+  function restartAudio() { audioEl.currentTime = 0; }
+  window.toggleAudio = toggleAudio;
+  window.restartAudio = restartAudio;
   audioEl.addEventListener('play', updatePlayPauseState);
   audioEl.addEventListener('pause', updatePlayPauseState);
   updatePlayPauseState();
@@ -515,14 +566,48 @@
   <script src="./assets/js/script.js"></script>
   <script>
     (function() {
-      const seq = 'fbbcdb';
+      // Each key is a note. One+ octave from middle C. Values are MIDI numbers.
+      const KEY_NOTE = {
+        a: 60, w: 61, s: 62, e: 63, d: 64, f: 65, t: 66, g: 67, y: 68, h: 69,
+        u: 70, j: 71, k: 72, o: 73, l: 74, p: 75, ';': 76, "'": 77, ']': 78
+      };
+      // Trigger melody: F  Bb  C(hi)  Db(hi)
+      const SEQ = ['f', 'u', 'k', 'o'];
       let pos = 0;
+      let ac = null;
+
+      function tone(midi) {
+        try {
+          if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+          if (ac.state === 'suspended') ac.resume();
+          const freq = 440 * Math.pow(2, (midi - 69) / 12);
+          const t = ac.currentTime;
+          const osc = ac.createOscillator();
+          const gain = ac.createGain();
+          osc.type = 'triangle';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.0001, t);
+          gain.gain.exponentialRampToValueAtTime(0.18, t + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+          osc.connect(gain).connect(ac.destination);
+          osc.start(t);
+          osc.stop(t + 0.4);
+        } catch (err) {}
+      }
+
       document.addEventListener('keydown', function(e) {
-        if (e.key === seq[pos]) {
-          pos++;
-          if (pos === seq.length) window.location.href = './pitch.html';
+        if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        if (!(key in KEY_NOTE)) return;
+
+        tone(KEY_NOTE[key]);
+
+        if (key === SEQ[pos]) {
+          if (++pos === SEQ.length) { pos = 0; window.location.href = './pitch.html'; }
         } else {
-          pos = e.key === seq[0] ? 1 : 0;
+          pos = key === SEQ[0] ? 1 : 0;
         }
       });
     })();
