@@ -8,14 +8,14 @@ function getRandomHex() {
 particlesJS("particles-js", {
   particles: {
     number: {
-      value: 300,
+      value: 520,
       density: {
         enable: true,
         value_area: 1000,
       },
     },
     color: {
-      value: ["#3e4a5e", "#434d62", "#4c5973", "#55627a", "#5a6578"],
+      value: ["#565656", "#606060", "#4e4e4e", "#6a6a6a", "#484848"],
     },
     shape: {
       type: "circle",
@@ -43,7 +43,7 @@ particlesJS("particles-js", {
       },
     },
     size: {
-      value: 2.5,
+      value: 1.5,
       random: true,
       anim: {
         enable: false,
@@ -55,13 +55,13 @@ particlesJS("particles-js", {
     line_linked: {
       enable: true,
       distance: 100,
-      color: "#4c5973",
+      color: "#4a4a4a",
       opacity: 0.5,
       width: 1,
     },
     move: {
       enable: true,
-      speed: 10,
+      speed: 4,
       direction: "none",
       random: true,
       straight: false,
@@ -74,14 +74,14 @@ particlesJS("particles-js", {
     },
   },
   interactivity: {
-    detect_on: "canvas",
+    detect_on: "window",
     events: {
       onhover: {
         enable: true,
         mode: "repulse",
       },
       onclick: {
-        enable: true,
+        enable: false,
         mode: "bubble",
       },
       resize: true,

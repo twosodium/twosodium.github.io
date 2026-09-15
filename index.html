@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="twosodium">
@@ -25,7 +25,14 @@
   
   
 <body>
-  <div id="particles-js"></div>
+  <div id="hero-fx">
+    <div id="particles-js"></div>
+  </div>
+
+  <canvas id="hero-gl" aria-hidden="true"></canvas>
+
+  <div class="ipa-diag" aria-hidden="true">/ˈænə ǔ/</div>
+
   <main>
     <div class="main-content">
       <nav class="navbar">
@@ -44,21 +51,19 @@
         </ul>
       </nav>
 
+      <div class="hero-spacer" aria-hidden="true"></div>
+      <div class="content">
       <article class="about  active" data-page="about" >
-        <div class="sidebar-info" data-sidebar>
-          <figure class="avatar-box">
-            <img src="./assets/images/profilogo.png" alt="Anna Wu" width="100">
-          </figure>
-          <div class="info-content">
-            <h1 class="name" title="twosodium">Anna Wu</h1>
-            <p class="title">/ˈænə ǔ/</p>
-          </div>
-        </div>
-        <section class="about-text">
+        <div class="about-row">
+          <section class="about-text">
           <p>
-            I study computer science at Stanford. My interests include machine learning, security and theoretical neuroscience. I also enjoy writing, listening to/composing/arranging <a href="https://flat.io/@roguewinter/">music</a>, puzzles and games, the history of Western esotericism, the ocean and sometimes making websites.
+            I study computer science at Stanford. My interests include machine learning, security and theoretical neuroscience. I also enjoy writing, listening to/composing/arranging <a href="https://flat.io/@roguewinter/">music</a>, puzzles and games, the history of Western esotericism and early modern Europe, the ocean and sometimes making websites.
           </p>
-        </section>
+          </section>
+          <figure class="pfp">
+            <img src="./assets/images/profilogo.jpg" alt="Anna Wu" width="130">
+          </figure>
+        </div>
 
           <div class="personal-sections">
             <div class="section-item">
@@ -94,8 +99,8 @@
             </div>
 
             <div class="section-item">
-              <img src="./assets/images/storygraph.png" alt="StoryGraph" class="storygraph-img" loading="lazy">
-              <p class="caption"><em><a href="https://app.thestorygraph.com/profile/eightseas">now reading</a></em></p>
+              <a href="https://app.thestorygraph.com/profile/eightseas" class="sg-logo"><img src="./assets/images/storygraph.png" alt="StoryGraph" class="storygraph-img" loading="lazy"></a>
+              <p class="caption"><em>now reading</em></p>
             </div>
           </div>
 
@@ -103,9 +108,11 @@
             <audio id="music" loop>
               <source src="./assets/8bit_lacrimosa.mp3" type="audio/mp3">
             </audio>
-            <button id="btn-restart" onclick="restartAudio()" type="button" title="Back to beginning"><img src="./assets/images/restart.svg" alt="Back to beginning" class="music-btn-icon"></button>
-            <button id="btn-toggle" onclick="toggleAudio()" type="button" title="Play"><img id="btn-toggle-icon" src="./assets/images/play.svg" alt="Play" class="music-btn-icon"></button>
-            <span class="music-text">BGM: Requiem (Verdi), "Lacrimosa" (or is it?)</span>
+            <button id="btn-restart" onclick="restartAudio()" type="button" title="Back to beginning"><img src="./assets/images/restart_white.svg" alt="Back to beginning" class="music-btn-icon"></button>
+            <button id="btn-toggle" onclick="toggleAudio()" type="button" title="Play"><img id="btn-toggle-icon" src="./assets/images/play_white.svg" alt="Play" class="music-btn-icon"></button>
+            <span class="music-text">music: Requiem (Verdi), "Lacrimosa," my remix (play me!)</span>
+            <span class="music-text music-sub">fill: responsive spiking neurons (try poking them with your keyboard?);</span>
+            <span class="credits" tabindex="0">image credits<span class="credits-tip">Collage (clockwise from top-left): Third Parable from Splendor Solis · Ambrogio Spinola's rapier · Fourth Parable from Splendor Solis · engraved frontispiece to Corelli's 12 Sonatas (original edition) · kelp forest tank, Monterey Bay Aquarium · Vanitas (1669) by Evert Collier · Purkinje neuron of the human cerebellum, Santiago Ramón y Cajal</span></span>
           </div>
         
       </article>
@@ -192,7 +199,7 @@
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-                  <img src="./assets/images/memowrite.png" width="100" alt="social_radio" loading="lazy">
+                  <img src="./assets/images/memowrite.png" width="100" alt="memowrite" loading="lazy">
                 </figure>
                 <h3 class="project-title">memowrite</h3>
                 <p class="project-subtitle">novel planning/writing tool with integrated wiki</p>
@@ -201,19 +208,18 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="projects">
-              <a href="https://devpost.com/software/asdf-596pqz">
+              <a href="https://github.com/riacode/videre">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-                  <img src="./assets/images/resonance.png" width="100" alt="resonance" loading="lazy">
+                  <img src="./assets/images/stanford.png" width="100" alt="videre" loading="lazy">
                 </figure>
-                <h3 class="project-title">resonance</h3>
-                <p class="project-subtitle">research assistant tool for TreeHacks 2026</p>
+                <h3 class="project-title">videre</h3>
+                <p class="project-subtitle">finding artifacts in AI-generated videos</p>
                 <p class="project-category">projects</p>
               </a>
             </li>
-
 
             <li class="project-item  active" data-filter-item data-category="projects">
               <a href="https://devpost.com/software/asdf-596pqz">
@@ -224,7 +230,7 @@
                   <img src="./assets/images/resonance.png" width="100" alt="resonance" loading="lazy">
                 </figure>
                 <h3 class="project-title">resonance</h3>
-                <p class="project-subtitle">research assistant tool for TreeHacks 2026</p>
+                <p class="project-subtitle">research assistant tool (TreeHacks 2026)</p>
                 <p class="project-category">projects</p>
               </a>
             </li>
@@ -243,6 +249,21 @@
               </a>
             </li>
 
+
+            <li class="project-item  active" data-filter-item data-category="projects">
+              <a href="https://cs224r.stanford.edu/projects/pdfs/Anna%20Wu%20Ethan%20Jun-shen%20Ho%20submission_416287520/cs224r_paper__1_.pdf">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/stanford.png" width="100" alt="cs224r" loading="lazy">
+                </figure>
+                <h3 class="project-title">small LLMs for security</h3>
+                <p class="project-subtitle">RLing small LLMs using a zero-sum game</p>
+                <p class="project-category">projects</p>
+              </a>
+            </li>
+
             <li class="project-item  active" data-filter-item data-category="projects">
               <a href="https://devpost.com/software/lemon-7gn5hq">
                 <figure class="project-img">
@@ -252,7 +273,7 @@
                   <img src="./assets/images/lemo.png" width="100" alt="lemon" loading="lazy">
                 </figure>
                 <h3 class="project-title">lemon</h3>
-                <p class="project-subtitle">sustainable ecommerce app for TreeHacks 2025</p>
+                <p class="project-subtitle">sustainable ecommerce app (TreeHacks 2025)</p>
                 <p class="project-category">projects</p>
               </a>
             </li>
@@ -293,7 +314,7 @@
                   </div>
                   <img src="./assets/images/cli_radio.png" width="100" alt="social_radio" loading="lazy">
                 </figure>
-                <h3 class="project-title">social_radio</h3>
+                <h3 class="project-title">social radio</h3>
                 <p class="project-subtitle">CLI radio player with Discord rich presence</p>
                 <p class="project-category">projects</p>
               </a>
@@ -306,7 +327,7 @@
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-                  <img src="./assets/images/stanfordhungry.png" width="100" alt="hungry" loading="lazy">
+                  <img src="./assets/images/stanford.png" width="100" alt="hungry" loading="lazy">
                 </figure>
                 <h3 class="project-title">stanfordhungry</h3>
                 <p class="project-subtitle">Selenium scraping tool for Stanford dining menus</p>
@@ -443,175 +464,18 @@
         </section>
       </article>
       
+      </div>
     </div>
 
 </main>
 <script src="particles.js-master/particles.js"></script>
 <script src="./particles.js-master/app.js"></script>
-<script>
-(function() {
-  var audioEl = document.getElementById('music');
-  if (!audioEl) return;
-  audioEl.volume = 0.2;
+<script src="./assets/js/neurons.js"></script>
+<script src="./assets/js/hero-gl.js"></script>
 
-  var btnToggle = document.getElementById('btn-toggle');
-  var toggleIcon = document.getElementById('btn-toggle-icon');
-  function updatePlayPauseState() {
-    var playing = !audioEl.paused;
-    if (toggleIcon) {
-      toggleIcon.src = playing ? './assets/images/pause.svg' : './assets/images/play.svg';
-      toggleIcon.alt = playing ? 'Pause' : 'Play';
-    }
-    if (btnToggle) btnToggle.title = playing ? 'Pause' : 'Play';
-  }
-  function toggleAudio() {
-    if (audioEl.paused) audioEl.play().catch(function() {});
-    else audioEl.pause();
-  }
-  // Rewind to the start; leave the play/pause status untouched.
-  function restartAudio() { audioEl.currentTime = 0; }
-  window.toggleAudio = toggleAudio;
-  window.restartAudio = restartAudio;
-  audioEl.addEventListener('play', updatePlayPauseState);
-  audioEl.addEventListener('pause', updatePlayPauseState);
-  updatePlayPauseState();
-
-  // --- Audio-reactive particle pulse (BGM only) ---
-  var audioCtx = null;
-  var analyser = null;
-  var dataArray = null;
-  var rafId = null;
-  var PULSE_STRENGTH = 2;
-  var PULSE_SENSITIVITY = 3;
-  var SMOOTHING = 0.7;
-  var smoothedLevel = 0;
-
-  function initAudioAnalyser() {
-    if (audioCtx) return true;
-    try {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      var source = audioCtx.createMediaElementSource(audioEl);
-      analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 64;
-      analyser.smoothingTimeConstant = SMOOTHING;
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      dataArray = new Uint8Array(analyser.frequencyBinCount);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function getAudioLevel() {
-    if (!analyser || !dataArray) return 0;
-    analyser.getByteFrequencyData(dataArray);
-    var sum = 0;
-    for (var i = 0; i < dataArray.length; i++) sum += dataArray[i];
-    return (sum / dataArray.length) / 255;
-  }
-
-  function pulseParticles() {
-    if (!window.pJSDom || !window.pJSDom[0]) {
-      rafId = requestAnimationFrame(pulseParticles);
-      return;
-    }
-    var pJS = window.pJSDom[0].pJS;
-    var arr = pJS.particles.array;
-    if (!arr || !arr.length) {
-      rafId = requestAnimationFrame(pulseParticles);
-      return;
-    }
-    var level = getAudioLevel();
-    smoothedLevel = smoothedLevel + (level - smoothedLevel);
-    var boosted = smoothedLevel * PULSE_SENSITIVITY;
-    var scale = 1 + PULSE_STRENGTH * boosted;
-    var now = Date.now();
-    for (var i = 0; i < arr.length; i++) {
-      var p = arr[i];
-      p.radius_bubble = undefined;
-      if (p.baseRadius === undefined) p.baseRadius = p.radius;
-      p.radius = Math.max(0.1, p.baseRadius * scale);
-      var inRepulse = p.repulseBrightUntil && now < p.repulseBrightUntil;
-      var inClick = p.clickBrightUntil && now < p.clickBrightUntil;
-      if (inRepulse || inClick) {
-        p.brightenAmount = 1;
-      } else {
-        if (p.brightenAmount > 0) {
-          p.brightenAmount *= 0.92;
-          if (p.brightenAmount < 0.02) p.brightenAmount = 0;
-        }
-      }
-      if (p.repulseBrightUntil && now >= p.repulseBrightUntil) p.repulseBrightUntil = undefined;
-      if (p.clickBrightUntil && now >= p.clickBrightUntil) p.clickBrightUntil = undefined;
-    }
-    rafId = requestAnimationFrame(pulseParticles);
-  }
-
-  audioEl.addEventListener('play', function onPlay() {
-    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-    if (!initAudioAnalyser()) return;
-    if (!rafId) pulseParticles();
-  });
-
-  // Start pulse loop so particles react as soon as music plays
-  pulseParticles();
-})();
-</script>
-  </div>
-</div>
-
-  
 </body>
   <script src="./assets/js/script.js"></script>
-  <script>
-    (function() {
-      // Each key is a note. One+ octave from middle C. Values are MIDI numbers.
-      const KEY_NOTE = {
-        a: 60, w: 61, s: 62, e: 63, d: 64, f: 65, t: 66, g: 67, y: 68, h: 69,
-        u: 70, j: 71, k: 72, o: 73, l: 74, p: 75, ';': 76, "'": 77, ']': 78
-      };
-      // Trigger melody: F  Bb  C(hi)  Db(hi)
-      const SEQ = ['f', 'u', 'k', 'o'];
-      let pos = 0;
-      let ac = null;
-
-      function tone(midi) {
-        try {
-          if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
-          if (ac.state === 'suspended') ac.resume();
-          const freq = 440 * Math.pow(2, (midi - 69) / 12);
-          const t = ac.currentTime;
-          const osc = ac.createOscillator();
-          const gain = ac.createGain();
-          osc.type = 'triangle';
-          osc.frequency.value = freq;
-          gain.gain.setValueAtTime(0.0001, t);
-          gain.gain.exponentialRampToValueAtTime(0.18, t + 0.008);
-          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
-          osc.connect(gain).connect(ac.destination);
-          osc.start(t);
-          osc.stop(t + 0.4);
-        } catch (err) {}
-      }
-
-      document.addEventListener('keydown', function(e) {
-        if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
-        const tag = (e.target.tagName || '').toLowerCase();
-        if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
-        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-        if (!(key in KEY_NOTE)) return;
-
-        tone(KEY_NOTE[key]);
-
-        if (key === SEQ[pos]) {
-          if (++pos === SEQ.length) { pos = 0; window.location.href = './pitch.html'; }
-        } else {
-          pos = key === SEQ[0] ? 1 : 0;
-        }
-      });
-    })();
-  </script>
+  <script src="./assets/js/keys.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </html>

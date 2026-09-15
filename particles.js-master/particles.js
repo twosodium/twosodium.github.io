@@ -426,6 +426,7 @@ var pJS = function(tag_id, params){
     var drawColor = p.color;
     var blend = (p.brightenAmount !== undefined && p.brightenAmount > 0) ? p.brightenAmount : 0;
     if (blend > 0 && p.color.rgb) {
+      // Fired neurons flash toward white against the black letter interiors.
       drawColor = { rgb: pJS.fn.vendors.lightenRgb(p.color.rgb, blend) };
     }
     if(drawColor.rgb){

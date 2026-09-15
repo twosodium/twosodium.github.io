@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>let's get pitchy</title>
   <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -25,18 +28,26 @@
 
     header .back {
       color: #555;
-      font-size: 13px;
+      font-family: 'EB Garamond', Garamond, serif;
+      font-style: italic;
+      font-size: 16px;
       display: inline-block;
       margin-bottom: 16px;
       transition: color 0.15s;
     }
-    header .back:hover { color: #a53f3c; }
+    header .back:hover { color: #5b6cff; }
 
     header h1 {
       color: #fff;
-      font-size: 26px;
-      font-weight: normal;
-      letter-spacing: -0.5px;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 800;
+      font-size: 44px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      display: inline-block;
+      margin-left: 14px;
+      transform: scaleX(0.75);
+      transform-origin: left;
     }
 
     header p {
@@ -59,7 +70,7 @@
       font-size: 12px;
       transition: color 0.15s;
     }
-    .page-nav a:hover { color: #e6d1ab; }
+    .page-nav a:hover { color: #5b6cff; }
 
     .game-section {
       max-width: 680px;
@@ -69,14 +80,15 @@
 
     .game-section + .game-section {
       border-top: 1px solid #111;
-      margin-top: 56px;
-      padding-top: 56px;
+      margin-top: 28px;
+      padding-top: 28px;
     }
 
     .game-section:last-child { padding-bottom: 120px; }
 
     h2 {
-      color: #e6d1ab;
+      color: #5b6cff;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 16px;
       font-weight: normal;
       margin-bottom: 6px;
@@ -84,8 +96,10 @@
     }
 
     .desc {
-      color: #444;
-      font-size: 12px;
+      color: #fff;
+      font-family: 'EB Garamond', Garamond, serif;
+      font-style: italic;
+      font-size: 15px;
       line-height: 1.6;
       margin-bottom: 28px;
       max-width: 520px;
@@ -143,18 +157,18 @@
     .btn:disabled { opacity: 0.3; cursor: default; }
 
     .btn.accent {
-      border-color: #6b2b28;
-      color: #e6d1ab;
+      border-color: #3a4bd0;
+      color: #5b6cff;
     }
     .btn.accent:hover:not(:disabled) {
-      background: #a53f3c;
-      border-color: #a53f3c;
+      background: #5b6cff;
+      border-color: #5b6cff;
       color: #fff;
     }
 
     .btn.on {
-      background: #a53f3c;
-      border-color: #a53f3c;
+      background: #5b6cff;
+      border-color: #5b6cff;
       color: #fff;
     }
 
@@ -164,7 +178,6 @@
       margin-bottom: 8px;
     }
 
-    /* Note grid */
     .note-grid {
       display: flex;
       flex-wrap: wrap;
@@ -186,12 +199,11 @@
     }
     .nb:hover:not(:disabled) { border-color: #555; }
     .nb:disabled { opacity: 0.25; cursor: default; }
-    .nb.sel { background: #3a1f1e; border-color: #a53f3c; color: #e6d1ab; }
+    .nb.sel { background: #20264d; border-color: #5b6cff; color: #5b6cff; }
     .nb.hit { background: #1e3a1e; border-color: #3a7a3a; color: #7acc7a; }
     .nb.miss { border-color: #3a7a3a; color: #3a7a3a; }
     .nb.err { background: #3a1f1e; border-color: #6b2b28; color: #cc5555; }
 
-    /* Result */
     .result {
       font-size: 12px;
       line-height: 1.9;
@@ -202,7 +214,6 @@
     .result.bad { color: #cc5555; }
     .result.info { color: #888; }
 
-    /* Piano keyboard */
     .piano-scroll { overflow-x: auto; margin-bottom: 14px; }
 
     .piano {
@@ -223,8 +234,8 @@
       transition: background 0.08s;
     }
     .wk:hover { background: #eee; }
-    .wk.lit { background: #c8a060 !important; }
-    .wk.seq { background: #a53f3c !important; }
+    .wk.lit { background: #8f9cff !important; }
+    .wk.seq { background: #5b6cff !important; }
 
     .bk {
       position: absolute;
@@ -238,10 +249,9 @@
       transition: background 0.08s;
     }
     .bk:hover { background: #2a2a2a; }
-    .bk.lit { background: #8a6030 !important; }
-    .bk.seq { background: #7a2a28 !important; }
+    .bk.lit { background: #5b6cff !important; }
+    .bk.seq { background: #4450d0 !important; }
 
-    /* Boundary meter */
     .b-meter-wrap { margin: 16px 0 6px; }
 
     .b-labels {
@@ -272,7 +282,7 @@
       top: -2px;
       width: 2px;
       height: calc(100% + 4px);
-      background: #a53f3c;
+      background: #5b6cff;
       transition: left 0.3s;
     }
 
@@ -458,7 +468,6 @@
 <script>
 'use strict';
 
-// ─── Note constants ────────────────────────────────────────────────────────
 
 const NOTE = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
 const NOTE_SF = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
@@ -466,7 +475,6 @@ const IS_BLACK = [false,true,false,true,false,false,true,false,true,false,true,f
 
 function midiToFreq(m) { return 440 * Math.pow(2, (m - 69) / 12); }
 function midiToSfName(m) { return NOTE_SF[m % 12] + (Math.floor(m / 12) - 1); }
-function noteLabel(m) { return NOTE[m % 12]; }
 function shuffle(a) {
   const b = [...a];
   for (let i = b.length - 1; i > 0; i--) {
@@ -477,7 +485,6 @@ function shuffle(a) {
 }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ─── Audio context ─────────────────────────────────────────────────────────
 
 let _ctx = null;
 function ctx() {
@@ -621,7 +628,7 @@ const MG = { melody: [], input: [], busy: false, done: false, round: 0, startLen
 
 (function buildMelodyPiano() {
   const piano = document.getElementById('mel-piano');
-  const start = 60, count = 24; // C4–B5
+  const start = 60, count = 24;
 
   const wpos = {};
   let wc = 0;
@@ -916,7 +923,7 @@ function bndStart() {
 
   BG.noteA   = na;
   BG.noteB   = nb;
-  BG.low     = BG.noteA * 100; // working in "midi-cents" (midi * 100)
+  BG.low     = BG.noteA * 100;
   BG.high    = BG.noteB * 100;
   BG.trial   = 0;
   BG.waiting = false;
@@ -983,7 +990,7 @@ function bndRespond(isA) {
   document.getElementById('bnd-btn-b').disabled = true;
   document.getElementById('bnd-replay').disabled = true;
 
-  const rangeLeft = BG.high - BG.low; // in midi-cents
+  const rangeLeft = BG.high - BG.low;
   const done = BG.trial >= BG.maxTrials || rangeLeft < 4;
 
   if (done) {
@@ -998,8 +1005,8 @@ function bndFinish() {
   document.getElementById('bnd-play').disabled = true;
   document.getElementById('bnd-trial').textContent = '';
 
-  const userCents = (BG.low + BG.high) / 2; // user boundary in midi-cents
-  const trueCents = (BG.noteA + BG.noteB) * 50; // true midpoint
+  const userCents = (BG.low + BG.high) / 2;
+  const trueCents = (BG.noteA + BG.noteB) * 50;
 
   const diffCents = userCents - trueCents;
 
@@ -1021,7 +1028,6 @@ function bndFinish() {
     biasLine = `Biased toward ${nB} by ${absDiff.toFixed(0)} cents; your boundary sits flat of the midpoint.`;
   }
 
-  // Reveal and populate the meter now that we're done
   document.getElementById('bnd-meter-wrap').style.display = 'block';
   document.getElementById('bnd-lbl-a').textContent =
     NOTE[BG.noteA % 12] + (Math.floor(BG.noteA / 12) - 1);
@@ -1049,9 +1055,6 @@ document.getElementById('bnd-replay').addEventListener('click', () => {
 document.getElementById('bnd-btn-a').addEventListener('click', () => bndRespond(true));
 document.getElementById('bnd-btn-b').addEventListener('click', () => bndRespond(false));
 
-// ══════════════════════════════════════════════════════════════════════════
-// WAV DOWNLOAD
-// ══════════════════════════════════════════════════════════════════════════
 
 function encodeWav(audioBuffer) {
   const samples    = audioBuffer.getChannelData(0);
@@ -1065,8 +1068,8 @@ function encodeWav(audioBuffer) {
   const str = (s, o) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
   str('RIFF', 0); v.setUint32(4, 36 + pcm.byteLength, true);
   str('WAVE', 8); str('fmt ', 12);
-  v.setUint32(16, 16, true); v.setUint16(20, 1, true);   // PCM
-  v.setUint16(22, 1, true);                               // mono
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
   v.setUint32(24, sampleRate, true);
   v.setUint32(28, sampleRate * 2, true);
   v.setUint16(32, 2, true); v.setUint16(34, 16, true);
@@ -1104,7 +1107,6 @@ async function downloadWav(renderFn, totalDuration, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-// Per-game download functions
 
 document.getElementById('chord-dl').addEventListener('click', () => {
   if (!CG.notes.length) return;
