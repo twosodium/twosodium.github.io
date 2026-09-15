@@ -15,7 +15,7 @@
     { src: './assets/images/collage/vanitas.jpg', ar: 960 / 685, bright: 1.9 },
     
     { src: './assets/images/collage/kelp.jpeg', ar: 3156 / 4100 },
-    { src: './assets/images/collage/corelli.png', ar: 2110 / 1478 }
+    { src: './assets/images/collage/corelli.jpg', ar: 1903 / 1294 }
   ];
   var COLLAGE_TOP = [
     { src: './assets/images/collage/sun1.jpg', ar: 960 / 1513, bright: 0.9 },
