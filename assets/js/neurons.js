@@ -14,7 +14,10 @@
       toggleIcon.src = playing ? './assets/images/pause_white.svg' : './assets/images/play_white.svg';
       toggleIcon.alt = playing ? 'Pause' : 'Play';
     }
-    if (btnToggle) btnToggle.title = playing ? 'Pause' : 'Play';
+    if (btnToggle) {
+      btnToggle.title = playing ? 'Pause' : 'Play';
+      btnToggle.classList.toggle('playing', playing);
+    }
   }
   function toggleAudio() {
     if (audioEl.paused) audioEl.play().catch(function() {});
