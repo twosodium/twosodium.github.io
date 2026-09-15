@@ -224,8 +224,8 @@ article {
   28% { transform: scale(0.96); }
   42% { transform: scale(1); }
 }
-#btn-toggle:not(.playing) {
-  animation: playpulse 1.5s ease-out infinite;
+#btn-toggle:not(.engaged) {
+  animation: playpulse 1s ease-out infinite;
 }
 @media (prefers-reduced-motion: reduce) {
   #btn-toggle { animation: none; }

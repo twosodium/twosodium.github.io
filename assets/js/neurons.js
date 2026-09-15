@@ -16,7 +16,7 @@
     }
     if (btnToggle) {
       btnToggle.title = playing ? 'Pause' : 'Play';
-      btnToggle.classList.toggle('playing', playing);
+      if (playing) btnToggle.classList.add('engaged');
     }
   }
   function toggleAudio() {
