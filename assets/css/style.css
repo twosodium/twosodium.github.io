@@ -892,4 +892,5 @@ body.on-portfolio .content { padding-top: 0; }
   .credits { display: none; }
   .musice .music-text { font-size: 13px; }
   .sg-logo { margin-bottom: 13px; }
+  .hero-spacer { height: 65vh; }
 }
