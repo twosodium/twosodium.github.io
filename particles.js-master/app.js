@@ -67,7 +67,7 @@ particlesJS("particles-js", {
       straight: false,
       out_mode: "out",
       attract: {
-        enable: true,
+        enable: false,
         rotateX: 600,
         rotateY: 1200,
       },
