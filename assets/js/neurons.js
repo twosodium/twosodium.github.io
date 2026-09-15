@@ -31,6 +31,17 @@
   audioEl.addEventListener('pause', updatePlayPauseState);
   updatePlayPauseState();
 
+  // Re-center hover-repulse on the cursor (particles.js ignores the canvas's top offset).
+  window.addEventListener('mousemove', function (e) {
+    if (!window.pJSDom || !window.pJSDom[0]) return;
+    var pJS = window.pJSDom[0].pJS;
+    if (!pJS.canvas || !pJS.canvas.el || !pJS.interactivity) return;
+    var rect = pJS.canvas.el.getBoundingClientRect();
+    var px = pJS.canvas.pxratio || 1;
+    pJS.interactivity.mouse.pos_x = (e.clientX - rect.left) * px;
+    pJS.interactivity.mouse.pos_y = (e.clientY - rect.top) * px;
+  }, { passive: true });
+
   var MIDI_LO = 48, MIDI_HI = 84;
   var SPEC_N = 48;
   var specX = new Float32Array(SPEC_N);
